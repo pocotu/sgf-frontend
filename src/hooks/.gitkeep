@@ -1,0 +1,3 @@
+# Custom Hooks
+# useAuth.js, useApi.js, useDebounce.js, useLocalStorage.js
+# Lógica reutilizable con hooks personalizados

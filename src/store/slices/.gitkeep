@@ -1,0 +1,3 @@
+# Redux Slices
+# authSlice.js, userSlice.js, classSlice.js, bookingSlice.js
+# Estado específico por funcionalidad con Redux Toolkit

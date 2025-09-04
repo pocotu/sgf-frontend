@@ -1,0 +1,4 @@
+# Services - API Communication
+# api.js - Cliente Axios configurado
+# authService.js, userService.js, classService.js, bookingService.js
+# Comunicación con backend y manejo de errores

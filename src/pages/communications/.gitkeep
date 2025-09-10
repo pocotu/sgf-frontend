@@ -1,0 +1,8 @@
+# Communications Pages
+
+This directory contains pages for the communications module, including:
+
+- NotificacionesPage.jsx - Página notificaciones
+- EmailsPage.jsx - Página emails  
+- SMSPage.jsx - Página SMS
+- ReportesPage.jsx - Página reportes académicos

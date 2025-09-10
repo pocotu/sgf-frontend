@@ -1,14 +1,18 @@
 # 🎨 SGA-P Frontend - Sistema de Gestión Integral para Academias Preuniversitarias
 
-Frontend del **Sistema de Gestión Integral para Academias Preuniversitarias (SGA-P)** desarrollado con **React 19 + Vite 6 + Redux Toolkit 2.0 + Tailwind CSS**, diseñado específicamente para academias de preparación preuniversitaria en Perú.
+Frontend del **Sistema de Gestión Integral para Academias Preuniversitarias (SGA-P)** desarrollado con **React 19 + Vite 6 + React Query + Jotai + Tailwind CSS**, diseñado específicamente para academias de preparación preu- - **Comunicación Estudiantes:** Mensajería directa, avisos grupales
+
+### **📚 Estudiante Dashboard**ción Estudiantes:** Mensajería directa, avisos grupales
+
+### **📚 Estudiante Dashboard**ia en Perú.
 
 ## 🎯 **Descripción del Proyecto**
 
-Interfaz web moderna, responsive y optimizada para academias preuniversitarias peruanas que preparan estudiantes para exámenes de admisión de universidades como **UNMSM, UNI, PUCP, UNFV**. Incluye dashboards especializados por rol académico, sistema de gestión integral y comunicación efectiva con padres/apoderados.
+Interfaz web moderna, responsive y optimizada para academias preuniversitarias peruanas que preparan estudiantes para exámenes de admisión de universidades. Incluye dashboards especializados por rol académico básico, sistema de gestión integral y comunicación efectiva en el entorno académico.
 
 ## 🏗️ **Arquitectura Frontend SGA-P**
 
-Sistema diseñado específicamente para **academias preuniversitarias peruanas** con arquitectura React moderna que soporta **8 roles académicos** y interfaz optimizada para gestión educativa integral.
+Sistema diseñado específicamente para **academias preuniversitarias peruanas** con arquitectura React moderna que soporta **3 roles básicos** y interfaz optimizada para gestión educativa integral.
 
 ### **🏛️ Estructura de Directorios Actual**
 
@@ -30,7 +34,7 @@ sgf-frontend/
 │       └── icon-512x512.png         # Icono PWA pantalla completa
 │
 ├── src/                             # Código fuente principal
-│   ├── main.jsx                     # Punto entrada React + Redux Provider
+│   ├── main.jsx                     # Punto entrada React + Query Provider + Jotai
 │   ├── App.jsx                      # Componente raíz con routing
 │   ├── index.css                    # Estilos globales Tailwind base
 │   ├── App.css                      # Estilos específicos componente App
@@ -66,13 +70,8 @@ sgf-frontend/
 │   │   │
 │   │   ├── dashboards/              # Dashboards especializados por rol
 │   │   │   ├── AdminDashboard.jsx   # Dashboard administrador general
-│   │   │   ├── CoordinadorDashboard.jsx # Dashboard coordinador académico
 │   │   │   ├── DocenteDashboard.jsx # Dashboard docente con clases
-│   │   │   ├── TutorDashboard.jsx   # Dashboard tutor personalizado
-│   │   │   ├── EstudianteDashboard.jsx # Dashboard estudiante
-│   │   │   ├── PadreDashboard.jsx   # Dashboard padre/apoderado
-│   │   │   ├── AdmisionesDashboard.jsx # Dashboard oficial admisiones
-│   │   │   └── FinancieroDashboard.jsx # Dashboard oficial financiero
+│   │   │   └── EstudianteDashboard.jsx # Dashboard estudiante
 │   │   │
 │   │   ├── forms/                   # Formularios específicos SGA-P
 │   │   │   ├── RegistroPostulante.jsx # Form registro postulante
@@ -115,8 +114,8 @@ sgf-frontend/
 │   │       ├── EnvioEmails.jsx      # Interface envío emails masivos
 │   │       ├── EnvioSMS.jsx         # Interface envío SMS
 │   │       ├── ReportesAcademicos.jsx # Generador reportes académicos
-│   │       ├── ChatTutoria.jsx      # Chat tutor-estudiante
-│   │       └── ComunicacionPadres.jsx # Comunicación con apoderados
+│   │       ├── NotificacionesPanel.jsx # Panel notificaciones sistema
+│   │       └── ComunicacionBasica.jsx # Comunicación básica académica
 │   │
 │   ├── pages/                       # 📄 Páginas principales (React Router)
 │   │   ├── HomePage.jsx             # Página inicio/landing
@@ -148,7 +147,7 @@ sgf-frontend/
 │   ├── hooks/                       # 🎣 Custom Hooks específicos SGA-P
 │   │   ├── useAuth.js               # Hook autenticación multi-rol
 │   │   ├── useApi.js                # Hook llamadas API con loading
-│   │   ├── useRolePermissions.js    # Hook permisos por rol académico
+│   │   ├── useRolePermissions.js    # Hook permisos básicos por rol
 │   │   ├── useDebounce.js           # Hook debounced search
 │   │   ├── useLocalStorage.js       # Hook persistencia local
 │   │   ├── useAcademicCalendar.js   # Hook calendario académico
@@ -166,17 +165,17 @@ sgf-frontend/
 │   │   ├── uploadService.js         # Servicio subida archivos
 │   │   └── reportService.js         # Servicio generación reportes
 │   │
-│   ├── store/                       # 📦 Redux Toolkit Store configuración
-│   │   ├── index.js                 # Store principal configuración
-│   │   └── slices/                  # Redux Slices por dominio
-│   │       ├── authSlice.js         # Estado autenticación y sesión
-│   │       ├── userSlice.js         # Estado usuarios del sistema
-│   │       ├── academicSlice.js     # Estado módulo académico
-│   │       ├── admissionsSlice.js   # Estado proceso admisiones
-│   │       ├── financialSlice.js    # Estado gestión financiera
-│   │       ├── communicationsSlice.js # Estado comunicaciones
-│   │       ├── uiSlice.js           # Estado interfaz usuario
-│   │       └── notificationsSlice.js # Estado notificaciones sistema
+│   ├── store/                       # 📦 Jotai Atoms configuración global
+│   │   ├── index.js                 # Exportación centralizada atoms
+│   │   └── atoms/                   # Jotai Atoms por dominio
+│   │       ├── authAtoms.js         # Atoms autenticación y sesión
+│   │       ├── userAtoms.js         # Atoms usuarios del sistema
+│   │       ├── academicAtoms.js     # Atoms módulo académico
+│   │       ├── admissionsAtoms.js   # Atoms proceso admisiones
+│   │       ├── financialAtoms.js    # Atoms gestión financiera
+│   │       ├── communicationsAtoms.js # Atoms comunicaciones
+│   │       ├── uiAtoms.js           # Atoms interfaz usuario
+│   │       └── notificationsAtoms.js # Atoms notificaciones sistema
 │   │
 │   ├── utils/                       # 🛠️ Utilidades y helpers
 │   │   ├── constants.js             # Constantes aplicación SGA-P
@@ -223,9 +222,9 @@ sgf-frontend/
 - **Routing:** React Router DOM v7 (con Data APIs)
 
 ### **Estado y Gestión Datos**
-- **Estado Global:** Redux Toolkit 2.0 (RTK Query para API calls)
+- **Estado Global:** React Query + Jotai (gestión estado reactivo)
 - **Cliente HTTP:** Axios 1.6+ (con interceptors personalizados)
-- **Cache:** React Query + Redux Toolkit Query (cache inteligente)
+- **Cache:** React Query (cache inteligente y sincronización server)
 - **Validación:** React Hook Form + Yup (validación optimizada)
 
 ### **UI y Estilos**
@@ -282,7 +281,7 @@ sgf-frontend/
 ### **📱 Responsive Design System**
 ```css
 /* Breakpoints Académicos */
-sm: 640px   /* Móviles (uso estudiantes/padres) */
+sm: 640px   /* Móviles (uso estudiantes) */
 md: 768px   /* Tablets (uso docentes en aula) */
 lg: 1024px  /* Laptops (uso administrativo) */
 xl: 1280px  /* Desktops (uso coordinación) */
@@ -304,21 +303,7 @@ xl: 1280px  /* Desktops (uso coordinación) */
 - **Reportes Ejecutivos:** Dashboards financieros, académicos, operativos
 - **Auditoria Sistema:** Logs actividad, cambios críticos
 
-### **📚 Coordinador Académico Dashboard**
-- **Planificación Académica:** Creación ciclos, asignación docentes-cursos
-- **Seguimiento Estudiantes:** Progreso académico, alertas rendimiento
-- **Gestión Docentes:** Evaluación, horarios, disponibilidad
-- **Simulacros Masivos:** Programación y análisis resultados
-- **Reportes Académicos:** Performance por curso, docente, estudiante
-
-### **🎓 Oficial de Admisiones Dashboard**
-- **Gestión Postulantes:** Pipeline inscripción completo
-- **Exámenes Ingreso:** Programación, aplicación, evaluación automática
-- **Proceso Matrícula:** Workflow matrícula con documentación
-- **Análisis Conversión:** Métricas postulante → estudiante matriculado
-- **Comunicación Masiva:** Emails/SMS automatizados proceso admisión
-
-### **👨‍🏫 Docente Dashboard**
+### **‍🏫 Docente Dashboard**
 - **Calendario Personal:** Horarios clases, disponibilidad, sustituciones
 - **Gestión Cursos:** Lista estudiantes, asistencia, calificaciones
 - **Registro Académico:** Marcado asistencia, ingreso notas en tiempo real
@@ -337,55 +322,29 @@ xl: 1280px  /* Desktops (uso coordinación) */
 - **Progreso Personal:** Avance por curso, simulacros, ranking relativo
 - **Inscripción Simulacros:** Disponibilidad, resultados históricos
 - **Recursos Estudio:** Material descarga, videos explicativos
-- **Comunicación:** Chat con tutores, avisos importantes
-
-### **👨‍👩‍👧‍👦 Padre/Apoderado Dashboard**
-- **Seguimiento Hijo:** Asistencia diaria, calificaciones, comportamiento
-- **Estado Financiero:** Pagos realizados, pendientes, becas
-- **Comunicación Academia:** Mensajes directos docentes/tutores
-- **Calendario Familiar:** Exámenes, eventos, reuniones padres
-- **Reportes Progreso:** Informes académicos descargables
-
-### **💰 Oficial Financiero Dashboard**
-- **Gestión Pagos:** Procesamiento, confirmación, conciliación
-- **Control Morosidad:** Estudiantes morosos, alertas automáticas
-- **Sistema Becas:** Asignación, seguimiento, renovación becas
-- **Reportes Financieros:** Ingresos, proyecciones, análisis cobranza
-- **Facturación Masiva:** Generación lotes facturas por ciclo
+- **Comunicación:** Avisos importantes del sistema
 
 ## 🔐 **Autenticación y Autorización Académica**
 
 ### **🔑 Sistema de Roles y Permisos**
 - **Login Multi-rol:** Interface adaptable según tipo de usuario
 - **JWT con Refresh:** Tokens seguros con renovación automática transparente  
-- **8 Roles Académicos:** Administrador, Coordinador, Oficial Admisiones, Docente, Tutor, Estudiante, Padre, Oficial Financiero
+- **3 Roles Académicos:** Administrador, Docente, Estudiante
 - **Guards por Componente:** Protección granular por funcionalidad
 - **Session Management:** Persistencia segura con timeout automático
 
 ### **🛡️ Matriz de Permisos Frontend**
 ```javascript
-// Ejemplo configuración permisos
+// Configuración permisos simplificada
 const rolePermissions = {
-  ADMINISTRADOR: ['*'], // Acceso total
-  COORDINADOR_ACADEMICO: [
-    'academic:read', 'academic:write', 'users:read', 
-    'reports:academic', 'courses:manage'
-  ],
+  ADMINISTRADOR: ['*'], // Acceso total sistema
   DOCENTE: [
     'attendance:write', 'grades:write', 'students:read',
-    'courses:assigned', 'materials:upload'
-  ],
-  TUTOR: [
-    'students:assigned', 'tutoring:manage', 'parents:communicate',
-    'progress:track', 'alerts:academic'
+    'courses:assigned', 'materials:upload', 'reports:own'
   ],
   ESTUDIANTE: [
     'profile:read', 'grades:own', 'attendance:own',
     'simulacros:participate', 'materials:download'
-  ],
-  PADRE: [
-    'children:track', 'payments:view', 'reports:children',
-    'communication:receive', 'calendar:family'
   ]
 };
 ```
@@ -400,7 +359,7 @@ const rolePermissions = {
 ## 📱 **Responsive Design para Academias**
 
 ### **📐 Diseño Mobile-First Académico**
-- **Mobile First:** Optimizado para smartphones (padres/estudiantes)
+- **Mobile First:** Optimizado para smartphones (estudiantes)
 - **Tablet Optimized:** Interface especial para tablets en aula (docentes)
 - **Desktop Enhanced:** Dashboards completos para administración
 - **Large Screen Support:** Proyección en aulas y salas de reuniones
@@ -410,9 +369,9 @@ const rolePermissions = {
 /* Configuración Tailwind personalizada */
 screens: {
   'xs': '480px',    // Smartphones pequeños
-  'sm': '640px',    // Smartphones estándar (estudiantes/padres)
+  'sm': '640px',    // Smartphones estándar (estudiantes)
   'md': '768px',    // Tablets (docentes en aula)
-  'lg': '1024px',   // Laptops (coordinadores)
+  'lg': '1024px',   // Laptops (administradores)
   'xl': '1280px',   // Desktops (administración)
   '2xl': '1536px',  // Pantallas grandes (proyección)
   'print': {'raw': 'print'}, // Optimización impresión reportes
@@ -524,12 +483,8 @@ npm run size-limit      # Verificar límites tamaño bundles
 
 ### **📊 Dashboards Especializados**
 - **`AdminDashboard`** - KPIs ejecutivos, gestión completa sistema
-- **`CoordinadorDashboard`** - Planificación académica, seguimiento docentes
 - **`DocenteDashboard`** - Gestión clases, calificaciones, asistencia
-- **`TutorDashboard`** - Seguimiento personalizado, comunicación padres
 - **`EstudianteDashboard`** - Progreso académico, simulacros, recursos
-- **`PadreDashboard`** - Seguimiento hijos, comunicación academia
-- **`FinancieroDashboard`** - Gestión pagos, becas, reportes financieros
 
 ### **📚 Gestión Académica**
 - **`CursoManager`** - CRUD cursos especializados por carrera
@@ -557,8 +512,7 @@ npm run size-limit      # Verificar límites tamaño bundles
 - **`NotificationCenter`** - Centro notificaciones tiempo real
 - **`EmailComposer`** - Composer emails individuales/masivos
 - **`SMSManager`** - Interface envío SMS recordatorios
-- **`ChatTutoria`** - Chat directo tutor-estudiante
-- **`ParentCommunication`** - Hub comunicación con apoderados
+- **`CommunicationHub`** - Hub comunicación académica básica
 
 ### **🎨 UI Components Base**
 - **`DataTable`** - Tabla avanzada con filtros, sort, export
@@ -568,79 +522,73 @@ npm run size-limit      # Verificar límites tamaño bundles
 - **`FileUpload`** - Upload archivos con drag & drop
 - **`SearchFilter`** - Filtros avanzados con autocomplete
 
-## 📊 **Arquitectura Redux Store SGA-P**
+## 📊 **Arquitectura Estado Global SGA-P**
 
-### **🏗️ Estructura Store**
+### **🏗️ Estructura Jotai Atoms**
 ```javascript
 store/
-├── index.js                    # Configuración store principal
-└── slices/                     # Redux Toolkit slices por dominio
-    ├── authSlice.js            # Estado autenticación y permisos
-    ├── userSlice.js            # Gestión usuarios sistema
-    ├── academicSlice.js        # Estado módulo académico completo
-    ├── admissionsSlice.js      # Proceso admisiones y postulantes  
-    ├── financialSlice.js       # Gestión financiera y pagos
-    ├── communicationsSlice.js  # Sistema comunicaciones y notificaciones
-    ├── uiSlice.js             # Estado UI (modals, loading, theme)
-    └── notificationsSlice.js   # Notificaciones tiempo real
+├── index.js                    # Exportación centralizada atoms
+└── atoms/                      # Jotai atoms por dominio
+    ├── authAtoms.js            # Atoms autenticación y permisos
+    ├── userAtoms.js            # Gestión usuarios sistema
+    ├── academicAtoms.js        # Atoms módulo académico completo
+    ├── admissionsAtoms.js      # Proceso admisiones y postulantes  
+    ├── financialAtoms.js       # Gestión financiera y pagos
+    ├── communicationsAtoms.js  # Sistema comunicaciones y notificaciones
+    ├── uiAtoms.js             # Estado UI (modals, loading, theme)
+    └── notificationsAtoms.js   # Notificaciones tiempo real
 ```
 
-### **🔄 Estado por Slice**
+### **🔄 Atoms por Dominio**
 ```javascript
-// authSlice - Autenticación y permisos
-{
-  user: null,                    // Usuario autenticado actual
-  token: null,                   // JWT token
-  refreshToken: null,            // Refresh token
-  permissions: [],               // Permisos específicos rol
-  isAuthenticated: false,        // Estado autenticación
-  loading: false,                // Loading auth operations
-  sessionTimeout: null           // Timestamp timeout sesión
-}
+// authAtoms - Autenticación y permisos
+export const userAtom = atom(null)                    // Usuario autenticado actual
+export const tokenAtom = atom(null)                   // JWT token
+export const refreshTokenAtom = atom(null)            // Refresh token
+export const permissionsAtom = atom([])               // Permisos específicos rol
+export const isAuthenticatedAtom = atom(false)        // Estado autenticación
+export const authLoadingAtom = atom(false)            // Loading auth operations
+export const sessionTimeoutAtom = atom(null)          // Timestamp timeout sesión
 
-// academicSlice - Módulo académico
-{
-  cursos: [],                    // Lista cursos disponibles
-  ciclos: [],                    // Ciclos académicos activos
-  horarios: [],                  // Horarios por curso/docente
-  asistencias: [],               // Registros asistencia
-  calificaciones: [],            // Calificaciones estudiantes
-  simulacros: [],                // Simulacros programados
-  estudiantes: [],               // Lista estudiantes por curso
-  docentes: [],                  // Docentes asignados
-  loading: { cursos: false, horarios: false, ... }
-}
+// academicAtoms - Módulo académico
+export const cursosAtom = atom([])                    // Lista cursos disponibles
+export const ciclosAtom = atom([])                    // Ciclos académicos activos
+export const horariosAtom = atom([])                  // Horarios por curso/docente
+export const asistenciasAtom = atom([])               // Registros asistencia
+export const calificacionesAtom = atom([])            // Calificaciones estudiantes
+export const simulacrosAtom = atom([])                // Simulacros programados
+export const estudiantesAtom = atom([])               // Lista estudiantes por curso
+export const docentesAtom = atom([])                  // Docentes asignados
+export const academicLoadingAtom = atom({})           // Loading states por módulo
 
-// financialSlice - Gestión financiera
-{
-  pagos: [],                     // Historial pagos
-  becas: [],                     // Becas asignadas
-  morosidad: [],                 // Estudiantes morosos
-  facturas: [],                  // Facturas generadas
-  estadoCuenta: null,            // Estado cuenta estudiante
-  reportes: {},                  // Reportes financieros cached
-  loading: { pagos: false, becas: false, ... }
-}
+// financialAtoms - Gestión financiera
+export const pagosAtom = atom([])                     // Historial pagos
+export const becasAtom = atom([])                     // Becas asignadas
+export const morosidadAtom = atom([])                 // Estudiantes morosos
+export const facturasAtom = atom([])                  // Facturas generadas
+export const estadoCuentaAtom = atom(null)            // Estado cuenta estudiante
+export const reportesAtom = atom({})                  // Reportes financieros cached
+export const financialLoadingAtom = atom({})          // Loading states
 ```
 
-### **⚡ RTK Query APIs**
+### **⚡ React Query Hooks**
 ```javascript
-// API endpoints con cache automático
-academicApi.js:
-- getCursos()                    // Lista cursos con filtros
-- createCurso()                  // Crear nuevo curso
-- updateAsistencia()             // Actualizar asistencia
-- getCalificaciones(estudianteId) // Calificaciones estudiante
+// Custom hooks con React Query + Jotai
+hooks/academic/:
+- useCursos()                    // Query cursos con cache automático
+- useCreateCurso()               // Mutation crear curso
+- useUpdateAsistencia()          // Mutation actualizar asistencia
+- useCalificaciones(estudianteId) // Query calificaciones estudiante
 
-admissionsApi.js:
-- getPostulantes()               // Lista postulantes
-- processInscripcion()           // Procesar inscripción
-- evaluateExamen()               // Evaluar examen ingreso
+hooks/admissions/:
+- usePostulantes()               // Query lista postulantes
+- useProcessInscripcion()        // Mutation procesar inscripción
+- useEvaluateExamen()            // Mutation evaluar examen ingreso
 
-financialApi.js:
-- processPago()                  // Procesar pago
-- generateFactura()              // Generar factura
-- assignBeca()                   // Asignar beca
+hooks/financial/:
+- useProcessPago()               // Mutation procesar pago
+- useGenerateFactura()           // Mutation generar factura
+- useAssignBeca()                // Mutation asignar beca
 ```
 
 ## 🔌 **Integración API y Manejo Errores**
@@ -716,7 +664,7 @@ const notificationSocket = {
 ```javascript
 hooks/
 ├── useAuth.js              # Autenticación y permisos
-├── useRolePermissions.js   # Validación permisos por rol
+├── useRolePermissions.js   # Validación permisos básicos
 ├── useSessionManager.js    # Gestión sesiones y timeout
 └── usePermissionGuard.js   # Guard componentes por permisos
 ```
@@ -865,7 +813,7 @@ export const validateGradeScale = (grade) => {
 ## 📊 **Estado del Proyecto SGA-P Frontend**
 
 ### **✅ Completado**
-- ✅ **Arquitectura Base:** React 19 + Vite 6 + Redux Toolkit 2.0
+- ✅ **Arquitectura Base:** React 19 + Vite 6 + React Query + Jotai
 - ✅ **Configuración Build:** Tailwind CSS 4 + PostCSS + ESLint 9
 - ✅ **PWA Setup:** Manifest.json + Service Workers + Icons
 - ✅ **Estructura Directorios:** Clean Architecture frontend completa
@@ -899,20 +847,20 @@ export const validateGradeScale = (grade) => {
 - 📋 Implementar `PostulanteForm` con upload documentos
 - 📋 Desarrollar `ExamenInterface` para exámenes ingreso
 - 📋 Crear `MatriculaWizard` proceso paso a paso
-- 📋 Dashboard `OficialAdmisiones` completo
+- 📋 Dashboard funcionalidades admisiones básicas
 - 📋 Integración PDF generation para documentos
 
 #### **🏃‍♂️ Sprint 4 - Gestión Financiera**
 - 📋 `PaymentProcessor` con gateway pagos Perú
 - 📋 `BecaManager` gestión becas académicas
 - 📋 `FinancialReports` dashboards y gráficos
-- 📋 Dashboard `OficialFinanciero` completo
+- 📋 Dashboard funcionalidades financieras básicas
 - 📋 Integración facturación electrónica SUNAT
 
 #### **🏃‍♂️ Sprint 5 - Comunicaciones y Móvil**
 - 📋 `NotificationCenter` con WebSocket real-time
 - 📋 `EmailComposer` para comunicaciones masivas
-- 📋 `ParentCommunication` hub padres/apoderados
+- 📋 `CommunicationHub` comunicación académica básica
 - 📋 Optimización PWA para móviles
 - 📋 Tests E2E con Playwright
 
@@ -952,6 +900,9 @@ export const validateGradeScale = (grade) => {
 /admin/cursos              # Administración cursos/ciclos
 /admin/reportes            # Reportes ejecutivos y KPIs
 /admin/configuracion       # Configuración sistema
+```
+
+#### **👨‍🏫 Docente (`/docente`)**
 /admin/auditoria          # Logs auditoria sistema
 ```
 

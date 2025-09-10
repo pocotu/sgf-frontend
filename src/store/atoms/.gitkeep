@@ -1,0 +1,12 @@
+# Jotai Atoms Directory
+
+This directory contains Jotai atoms organized by domain:
+
+- authAtoms.js - Atoms autenticación y sesión
+- userAtoms.js - Atoms usuarios del sistema  
+- academicAtoms.js - Atoms módulo académico
+- admissionsAtoms.js - Atoms proceso admisiones
+- financialAtoms.js - Atoms gestión financiera
+- communicationsAtoms.js - Atoms comunicaciones
+- uiAtoms.js - Atoms interfaz usuario
+- notificationsAtoms.js - Atoms notificaciones sistema

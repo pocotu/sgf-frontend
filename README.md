@@ -867,7 +867,7 @@ export const validateGradeScale = (grade) => {
 #### **🏃‍♂️ Sprint 6 - Optimización y Deploy**
 - 📋 Performance optimization y code splitting
 - 📋 Bundle size optimization
-- 📋 Setup CI/CD pipeline
+- 📋 Setup scripts automatizados de despliegue
 - 📋 Docker containerization
 - 📋 Deployment producción con monitoreo
 

@@ -1,5 +1,0 @@
-# Store Directory
-
-This directory contains:
-- atoms/ - Jotai atoms organized by domain
-- index.js - Centralized atom exports according to README documentation

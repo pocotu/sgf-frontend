@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+.vite
+
+# Coverage
+coverage
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+
+# Misc
+*.min.js
+*.min.css

@@ -90,18 +90,6 @@ npm run format            # Formatear codigo
 npm run format:check      # Verificar formato
 ```
 
-## Configuración
-
-### Variables de Entorno
-
-Crear un archivo `.env` basado en `.env.example`:
-
-```env
-VITE_API_URL=http://localhost:3000/api/v1
-VITE_API_TIMEOUT=10000
-VITE_ENV=development
-```
-
 ## Arquitectura
 
 El proyecto sigue una arquitectura por features con separación clara de responsabilidades:
@@ -149,14 +137,9 @@ El proyecto incluye workflows de GitHub Actions para garantizar la calidad del c
 - No permite push directo a main/develop
 - Aplica a todos los usuarios (incluidos admins)
 
-### Documentacion
-
-- [Quick Start CI/CD](docs/QUICK_START_CI_CD.md) - Guia rapida de configuracion
-- [Arquitectura](docs/ARCHITECTURE.md) - Documentacion tecnica completa
-
 ## Enlaces
 
 - Backend: `http://localhost:3000`
 - Frontend: `http://localhost:5173`
-- API Docs: Ver `docs/detalles/API_Endpoints.md`
+
 

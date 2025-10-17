@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -39,4 +41,52 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.backend-status {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 0.5em;
+}
+
+.backend-status.checking {
+  color: #888;
+  background: #f5f5f5;
+}
+
+.backend-status.ok {
+  color: #22c55e;
+  background: #f0fdf4;
+}
+
+.backend-status.sleeping {
+  color: #f59e0b;
+  background: #fffbeb;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.backend-status.error {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+.status-hint {
+  font-size: 0.85em;
+  color: #f59e0b;
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }

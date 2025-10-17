@@ -58,9 +58,7 @@ function App() {
       case 'ok':
         return 'OK';
       case 'sleeping':
-        return isWakingUp
-          ? `Iniciando backend... (${retryCount + 1}/3)`
-          : 'Inactivo';
+        return isWakingUp ? `Iniciando backend... (${retryCount + 1}/3)` : 'Inactivo';
       case 'error':
         return 'ERROR';
       default:
@@ -87,9 +85,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <p className={`backend-status ${backendStatus}`}>
-          Backend: {getStatusMessage()}
-        </p>
+        <p className={`backend-status ${backendStatus}`}>Backend: {getStatusMessage()}</p>
         {getStatusHint() && <p className="status-hint">{getStatusHint()}</p>}
       </div>
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>

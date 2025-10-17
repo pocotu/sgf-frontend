@@ -77,17 +77,17 @@ VITE_API_URL=http://localhost:3000/api/v1
 # Desarrollo (con hot reload)
 npm run dev
 
-# Build para producción
+# Build para produccion
 npm run build
 
-# Preview del build de producción
+# Preview del build de produccion
 npm run preview
 
-# Ejecutar tests
-npm run test
-
-# Linting
-npm run lint
+# Linting y formato
+npm run lint              # Verificar codigo
+npm run lint:fix          # Arreglar errores automaticamente
+npm run format            # Formatear codigo
+npm run format:check      # Verificar formato
 ```
 
 ## Configuración
@@ -118,6 +118,35 @@ El proyecto sigue una arquitectura por features con separación clara de respons
 - **Admin**: Acceso completo al sistema
 - **Docente**: Gestión de grupos, asistencia y notas
 - **Estudiante**: Consulta de información personal
+
+## CI/CD
+
+El proyecto incluye workflows de GitHub Actions para garantizar la calidad del codigo:
+
+### Workflows Automaticos
+
+1. **Lint Workflow** - Verifica estilo de codigo y formato
+   - Ejecuta ESLint
+   - Verifica formato con Prettier
+   - Se ejecuta en cada PR y push a main/develop
+
+2. **Build Workflow** - Verifica que el proyecto compile
+   - Ejecuta build de produccion
+   - Calcula tamano del build
+   - Sube artefactos de build
+   - Se ejecuta en cada PR y push a main/develop
+
+### Branch Protection
+
+- Requiere aprobacion de PR antes de merge
+- Requiere que pasen todos los checks (lint + build)
+- No permite push directo a main/develop
+- Aplica a todos los usuarios (incluidos admins)
+
+### Documentacion
+
+- [Quick Start CI/CD](docs/QUICK_START_CI_CD.md) - Guia rapida de configuracion
+- [Arquitectura](docs/ARCHITECTURE.md) - Documentacion tecnica completa
 
 ## Enlaces
 

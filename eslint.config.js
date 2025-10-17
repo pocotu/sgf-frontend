@@ -106,6 +106,11 @@ export default [
   // Configuración específica para archivos de configuración
   {
     files: ['*.config.js', 'vite.config.js', 'tailwind.config.js', 'postcss.config.js'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
     rules: {
       'no-console': 'off',
     },

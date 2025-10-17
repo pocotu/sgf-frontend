@@ -92,8 +92,6 @@ npm run format:check      # Verificar formato
 
 ## Arquitectura
 
-El proyecto sigue una arquitectura por features con separación clara de responsabilidades:
-
 - **Components**: Componentes reutilizables organizados por módulo
 - **Pages**: Páginas completas que usan los componentes
 - **Hooks**: Custom hooks para lógica reutilizable
@@ -109,37 +107,8 @@ El proyecto sigue una arquitectura por features con separación clara de respons
 
 ## CI/CD
 
-El proyecto incluye workflows de GitHub Actions para garantizar la calidad del codigo:
-
-### Workflows Automaticos
-
-1. **Lint Workflow** - Verifica estilo de codigo y formato
-   - Ejecuta ESLint
-   - Verifica formato con Prettier
-   - Se ejecuta en cada PR y push a main/develop
-
-2. **Test Workflow** - Ejecuta tests unitarios y de integracion
-   - Ejecuta Vitest con coverage
-   - Verifica thresholds de coverage
-   - Comenta resultados en PR
-   - Se ejecuta en cada PR y push a main/develop
-
-3. **Build Workflow** - Verifica que el proyecto compile
-   - Ejecuta build de produccion
-   - Calcula tamano del build
-   - Sube artefactos de build
-   - Se ejecuta en cada PR y push a main/develop
-
 ### Branch Protection
 
 - Requiere aprobacion de PR antes de merge
 - Requiere que pasen todos los checks (lint + test + build)
-- No permite push directo a main/develop
-- Aplica a todos los usuarios (incluidos admins)
-
-## Enlaces
-
-- Backend: `http://localhost:3000`
-- Frontend: `http://localhost:5173`
-
-
+- No permite push directo a main

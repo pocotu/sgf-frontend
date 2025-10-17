@@ -52,10 +52,10 @@ export default [
       // ===== CODE QUALITY =====
       // Errores comunes
       'no-unused-vars': [
-        'warn',
+        'error',
         {
           argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
+          varsIgnorePattern: '^_|^(StrictMode|App)$',
           ignoreRestSiblings: true,
         },
       ],

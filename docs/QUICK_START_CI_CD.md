@@ -25,6 +25,7 @@ Guia rapida para configurar la proteccion del repositorio frontend en 5 minutos.
    [x] Require status checks to pass before merging
    [x] Status checks that are required:
       - lint
+      - test
       - build
    [x] Include administrators
 5. Save changes
@@ -44,7 +45,8 @@ git push origin test/ci-cd
 # Ir a GitHub y crear un Pull Request hacia develop
 # Verificar que se ejecuten automaticamente:
 # 1. Frontend Lint [PASS]
-# 2. Frontend Build [PASS]
+# 2. Frontend Test [PASS]
+# 3. Frontend Build [PASS]
 ```
 
 **Listo!** Ahora tienes proteccion del repositorio funcionando.
@@ -81,6 +83,7 @@ git push origin feature/FE-XXX-descripcion
 
 # GitHub Actions ejecutara automaticamente:
 [RUNNING] Lint Workflow (1-2 min)
+[RUNNING] Test Workflow (1-2 min)
 [RUNNING] Build Workflow (2-3 min)
 ```
 
@@ -157,6 +160,69 @@ git push origin develop
 Linting failed. Please fix the issues and push again.
 ```
 
+### 2. Test Workflow
+
+**Archivo:** `.github/workflows/test.yml`
+
+**Se ejecuta en:**
+
+- Pull Request a `main` o `develop`
+- Push a `main` o `develop`
+
+**Acciones:**
+
+1. Checkout codigo
+2. Setup Node.js 22
+3. Instalar dependencias (`npm ci`)
+4. Ejecutar tests con coverage (`npm run test:coverage`)
+5. Subir coverage a Codecov (opcional)
+6. Comentar coverage en PR (formato tabla ASCII)
+
+**Tiempo:** 1-2 minutos
+
+**Configuracion de Vitest:**
+```javascript
+// vitest.config.js
+coverage: {
+  thresholds: {
+    branches: 50,    // Cobertura de ramas (50% como backend inicial)
+    functions: 60,   // Cobertura de funciones
+    lines: 60,       // Cobertura de lineas
+    statements: 60,  // Cobertura de sentencias
+  }
+}
+
+// Archivos excluidos del coverage (similar al backend):
+- src/main.jsx (entry point - bootstrapping)
+- src/App.jsx (root component - routing setup)
+- src/App.css (estilos)
+- src/index.css (estilos globales)
+- *.config.js (configuracion)
+- tests/ (archivos de tests)
+- dist/ (build output)
+- node_modules/ (dependencias)
+```
+
+**Mensaje de coverage en PR:**
+```
+## Test Coverage Report
+
+| Metric | Coverage | Status |
+|--------|----------|--------|
+| Statements | XX.XX% | [PASS/WARN] |
+| Branches | XX.XX% | [PASS/WARN] |
+| Functions | XX.XX% | [PASS/WARN] |
+| Lines | XX.XX% | [PASS/WARN] |
+
+Overall Status: [PASS/WARN]
+
+Thresholds:
+- Statements: 60%
+- Branches: 50%
+- Functions: 60%
+- Lines: 60%
+```
+
 **Configuracion de ESLint:**
 ```javascript
 // eslint.config.js
@@ -178,7 +244,7 @@ rules: {
 }
 ```
 
-### 2. Build Workflow
+### 3. Build Workflow
 
 **Archivo:** `.github/workflows/build.yml`
 
@@ -273,6 +339,10 @@ npm run lint              # Verificar estilo
 npm run lint:fix          # Arreglar automaticamente
 npm run format            # Formatear codigo
 npm run format:check      # Verificar formato
+npm test                  # Ejecutar tests
+npm run test:coverage     # Tests con coverage
+npm run test:watch        # Tests en modo watch
+npm run test:ui           # Tests con UI interactiva
 npm run build             # Build de produccion
 npm run preview           # Preview del build
 

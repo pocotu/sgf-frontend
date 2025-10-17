@@ -40,27 +40,3 @@ jobs:
           name: frontend-build
           path: dist/
           retention-days: 7
-      
-      - name: Comment PR with build info
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const buildSize = process.env.BUILD_SIZE || 'Unknown';
-            const body = `## Build Report
-            
-            | Metric | Value |
-            |--------|-------|
-            | Build Size | ${buildSize} |
-            | Status | [PASS] Build completed successfully |
-            | Node Version | 22 |
-            | Build Tool | Vite |
-            
-            Build artifacts are available for download in the Actions tab.`;
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.name,
-              body: body
-            })

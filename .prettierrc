@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/prettierrc",
   "printWidth": 100,
   "tabWidth": 2,
   "useTabs": false,
@@ -14,5 +15,35 @@
   "proseWrap": "preserve",
   "htmlWhitespaceSensitivity": "css",
   "embeddedLanguageFormatting": "auto",
-  "singleAttributePerLine": false
+  "singleAttributePerLine": false,
+  "insertPragma": false,
+  "requirePragma": false,
+  "overrides": [
+    {
+      "files": "*.json",
+      "options": {
+        "printWidth": 80,
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "printWidth": 80,
+        "proseWrap": "always"
+      }
+    },
+    {
+      "files": "*.css",
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": ".prettierrc",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
 }

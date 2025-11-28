@@ -3,40 +3,77 @@ name: Frontend Build
 on:
   pull_request:
     branches: [main, develop]
+    paths:
+      - 'sgf-frontend/**'
+      - '.github/workflows/build.yml'
   push:
     branches: [main, develop]
+    paths:
+      - 'sgf-frontend/**'
+      - '.github/workflows/build.yml'
 
 jobs:
   build:
+    name: Build & Bundle Analysis
     runs-on: ubuntu-latest
     
+    defaults:
+      run:
+        working-directory: ./sgf-frontend
+    
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Setup Node.js 22
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: sgf-frontend/package-lock.json
       
-      - name: Install dependencies
+      - name: Install
         run: npm ci
       
-      - name: Build application
+      - name: Build
         run: npm run build
         env:
           NODE_ENV: production
       
-      - name: Check build size
+      - name: Analyze Bundle Size
         run: |
+          echo "### Build Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Total build size
           BUILD_SIZE=$(du -sh dist | cut -f1)
-          echo "Build size: $BUILD_SIZE"
-          echo "BUILD_SIZE=$BUILD_SIZE" >> $GITHUB_ENV
+          echo "**Total Build Size:** $BUILD_SIZE" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Individual file sizes
+          echo "**Main Files:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          du -h dist/assets/*.js 2>/dev/null | sort -hr | head -5 || echo "No JS files found"
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          
+          # Check if bundle is too large (warning at 500KB)
+          TOTAL_SIZE=$(du -sb dist | cut -f1)
+          MAX_SIZE=$((500 * 1024))  # 500KB in bytes
+          
+          if [ $TOTAL_SIZE -gt $MAX_SIZE ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "[WARN] Bundle size exceeds 500KB" >> $GITHUB_STEP_SUMMARY
+            echo "Consider code splitting or lazy loading" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "[OK] Bundle size is optimal" >> $GITHUB_STEP_SUMMARY
+          fi
       
-      - name: Upload build artifacts
+      - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: frontend-build
-          path: dist/
+          path: sgf-frontend/dist/
           retention-days: 7
+      
+

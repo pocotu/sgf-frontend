@@ -3,23 +3,13 @@ name: Frontend Lint & Format
 on:
   pull_request:
     branches: [main, develop]
-    paths:
-      - 'sgf-frontend/**'
-      - '.github/workflows/lint.yml'
   push:
     branches: [main, develop]
-    paths:
-      - 'sgf-frontend/**'
-      - '.github/workflows/lint.yml'
 
 jobs:
   lint:
     name: Code Quality Check
     runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        working-directory: ./sgf-frontend
     
     steps:
       - name: Checkout
@@ -30,7 +20,7 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: sgf-frontend/package-lock.json
+          cache-dependency-path: 'package-lock.json'
       
       - name: Install
         run: npm ci
@@ -50,5 +40,3 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- ESLint: [OK] Passed" >> $GITHUB_STEP_SUMMARY
           echo "- Prettier: [OK] Passed" >> $GITHUB_STEP_SUMMARY
-      
-

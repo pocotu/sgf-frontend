@@ -3,23 +3,13 @@ name: Frontend Build
 on:
   pull_request:
     branches: [main, develop]
-    paths:
-      - 'sgf-frontend/**'
-      - '.github/workflows/build.yml'
   push:
     branches: [main, develop]
-    paths:
-      - 'sgf-frontend/**'
-      - '.github/workflows/build.yml'
 
 jobs:
   build:
     name: Build & Bundle Analysis
     runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        working-directory: ./sgf-frontend
     
     steps:
       - name: Checkout
@@ -30,7 +20,7 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: sgf-frontend/package-lock.json
+          cache-dependency-path: 'package-lock.json'
       
       - name: Install
         run: npm ci
@@ -45,20 +35,17 @@ jobs:
           echo "### Build Analysis" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          # Total build size
           BUILD_SIZE=$(du -sh dist | cut -f1)
           echo "**Total Build Size:** $BUILD_SIZE" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          # Individual file sizes
           echo "**Main Files:**" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           du -h dist/assets/*.js 2>/dev/null | sort -hr | head -5 || echo "No JS files found"
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           
-          # Check if bundle is too large (warning at 500KB)
           TOTAL_SIZE=$(du -sb dist | cut -f1)
-          MAX_SIZE=$((500 * 1024))  # 500KB in bytes
+          MAX_SIZE=$((500 * 1024))
           
           if [ $TOTAL_SIZE -gt $MAX_SIZE ]; then
             echo "" >> $GITHUB_STEP_SUMMARY
@@ -73,7 +60,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-build
-          path: sgf-frontend/dist/
+          path: dist/
           retention-days: 7
-      
-

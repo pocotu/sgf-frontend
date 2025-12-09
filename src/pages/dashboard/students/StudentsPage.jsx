@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StudentService } from '../../../services/student.service';
-import Table, { TableRow, TableCell } from '../../../components/ui/Table';
-import Badge from '../../../components/ui/Badge';
-import Card from '../../../components/ui/Card';
-import Button from '../../../components/ui/Button';
+
 
 const StudentsPage = () => {
   const navigate = useNavigate();
@@ -12,23 +9,23 @@ const StudentsPage = () => {
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ modalidad: '', area: '' });
 
-  useEffect(() => {
-    fetchStudents();
-  }, [filters]);
-
   const fetchStudents = async () => {
     setLoading(true);
     try {
-      const response = await StudentService.getStudents(filters);
+      const response = await StudentService.getStudents();
       if (response.success) {
-        setStudents(response.data); // data is array for students in mock currently? Check mock
+        setStudents(response.data);
       }
     } catch (error) {
-      console.error("Error fetching students:", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
 
   const getModalityColor = (mod) => {
     switch(mod) {

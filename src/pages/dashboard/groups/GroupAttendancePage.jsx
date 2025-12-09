@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Button from '../../../components/ui/Button';
-import Card from '../../../components/ui/Card';
-import Table, { TableRow, TableCell } from '../../../components/ui/Table';
-import Input from '../../../components/ui/Input';
-import { GroupService } from '../../../services/group.service';
+
 import { EnrollmentService } from '../../../services/enrollment.service';
+
+import { GroupService } from '../../../services/group.service';
 import { AttendanceService } from '../../../services/attendance.service';
 
 const GroupAttendancePage = () => {
@@ -19,36 +17,35 @@ const GroupAttendancePage = () => {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
   useEffect(() => {
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const [groupRes, enrollRes] = await Promise.all([
+                GroupService.getGroupById(id),
+                EnrollmentService.getEnrollments({ grupo_id: id })
+            ]);
+
+            if (groupRes.success) {setGroup(groupRes.data);}
+            if (enrollRes.success) {
+                const list = enrollRes.data;
+                setStudents(list);
+                
+                // Initialize all as PRESENT by default
+                const initialData = {};
+                list.forEach(s => {
+                    initialData[s.estudiante_id] = 'PRESENTE'; // Default
+                });
+                setAttendanceData(initialData);
+            }
+
+        } catch (error) {
+            console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
+        }
+    };
     fetchData();
   }, [id]);
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-        const [groupRes, enrollRes] = await Promise.all([
-            GroupService.getGroupById(id),
-            EnrollmentService.getEnrollments({ grupo_id: id })
-        ]);
-
-        if (groupRes.success) setGroup(groupRes.data);
-        if (enrollRes.success) {
-            const list = enrollRes.data;
-            setStudents(list);
-            
-            // Initialize all as PRESENT by default
-            const initialData = {};
-            list.forEach(s => {
-                initialData[s.estudiante_id] = 'PRESENTE'; // Default
-            });
-            setAttendanceData(initialData);
-        }
-
-    } catch (error) {
-        console.error("Error fetching data", error);
-    } finally {
-        setLoading(false);
-    }
-  };
 
   const handleStatusChange = (studentId, status) => {
       setAttendanceData(prev => ({
@@ -87,7 +84,7 @@ const GroupAttendancePage = () => {
       }
   };
 
-  if (loading) return <div className="p-8 text-center text-slate-500">Cargando lista...</div>;
+  if (loading) {return <div className="p-8 text-center text-slate-500">Cargando lista...</div>;}
 
   return (
     <div className="space-y-6">

@@ -11,15 +11,6 @@ const EnrollmentModal = ({ isOpen, onClose, groupId, onSuccess }) => {
   const [selectedStudentIds, setSelectedStudentIds] = useState([]); 
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Fetch students for selection (mock search)
-  useEffect(() => {
-    if (isOpen) {
-        fetchStudents();
-        setSelectedStudentIds([]); // Reset on open
-        setSearchTerm('');
-    }
-  }, [isOpen]);
-
   const fetchStudents = async () => {
       try {
           const response = await StudentService.getStudents();
@@ -31,18 +22,27 @@ const EnrollmentModal = ({ isOpen, onClose, groupId, onSuccess }) => {
       }
   };
 
+  // Fetch students for selection (mock search)
+  useEffect(() => {
+    if (isOpen) {
+        fetchStudents();
+        setSelectedStudentIds([]); // Reset on open
+        setSearchTerm('');
+    }
+  }, [isOpen]);
+
   const handleToggleStudent = (id) => {
       setSelectedStudentIds(prev => {
           if (prev.includes(id)) {
               return prev.filter(sid => sid !== id);
-          } else {
+          } 
               return [...prev, id];
-          }
+          
       });
   };
 
   const handleEnroll = async () => {
-      if (selectedStudentIds.length === 0) return;
+      if (selectedStudentIds.length === 0) {return;}
       
       setLoading(true);
       try {
@@ -54,7 +54,7 @@ const EnrollmentModal = ({ isOpen, onClose, groupId, onSuccess }) => {
                   grupo_id: groupId,
                   monto_pagado: 500
               });
-              if (response.success || response.data) successCount++;
+              if (response.success || response.data) {successCount++;}
           }
           
           if (successCount > 0) {

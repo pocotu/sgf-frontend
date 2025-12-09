@@ -28,6 +28,7 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (USE_MOCKS && error.config) {
+      // eslint-disable-next-line no-console
       console.log(`[MOCK] Intercepting request to: ${error.config.url}`);
       try {
         const mockResponse = await mockRequest(error.config);

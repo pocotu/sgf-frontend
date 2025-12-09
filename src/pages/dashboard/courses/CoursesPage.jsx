@@ -1,38 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { CourseService } from '../../../services/course.service';
-import Card from '../../../components/ui/Card';
-import Badge from '../../../components/ui/Badge';
-import Button from '../../../components/ui/Button';
 
 const CoursesPage = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedArea, setSelectedArea] = useState('');
 
-  useEffect(() => {
-    fetchCourses();
-  }, [selectedArea]);
-
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const response = await CourseService.getCourses({ area: selectedArea });
+      const response = await CourseService.getCourses();
       if (response.success) {
         setCourses(response.data);
       }
     } catch (error) {
-      console.error("Error fetching courses:", error);
+      console.error(error); // Mock error for now
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
   const getAreaColor = (area) => {
     const colors = {
-      'A': 'bg-red-100 text-red-700',
-      'B': 'bg-blue-100 text-blue-700',
-      'C': 'bg-orange-100 text-orange-700',
-      'D': 'bg-purple-100 text-purple-700'
+      A: 'bg-red-100 text-red-700',
+      B: 'bg-blue-100 text-blue-700',
+      C: 'bg-orange-100 text-orange-700',
+      D: 'bg-purple-100 text-purple-700'
     };
     return colors[area] || 'bg-slate-100';
   };

@@ -22,6 +22,8 @@ const DashboardLayout = () => {
     { name: 'Estudiantes', path: '/dashboard/estudiantes', icon: '🎓', roles: ['admin', 'docente'] },
     { name: 'Cursos', path: '/dashboard/cursos', icon: '📚' },
     { name: 'Grupos', path: '/dashboard/grupos', icon: '🏫', roles: ['admin', 'docente'] },
+    { name: 'Evaluaciones', path: '/dashboard/evaluaciones', icon: '📝' },
+    { name: 'Registrar Notas', path: '/dashboard/notas', icon: '💯', roles: ['admin', 'docente'] },
     { name: 'Mis Asistencias', path: '/dashboard/mis-asistencias', icon: '📅', roles: ['estudiante'] },
     // Add more items here
   ];

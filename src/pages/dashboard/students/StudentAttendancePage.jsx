@@ -1,9 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import { userAtom } from '../../../store/auth.store';
-import Card from '../../../components/ui/Card';
-import Table, { TableRow, TableCell } from '../../../components/ui/Table';
-import Badge from '../../../components/ui/Badge';
 import { AttendanceService } from '../../../services/attendance.service';
 
 const StudentAttendancePage = () => {
@@ -11,13 +9,6 @@ const StudentAttendancePage = () => {
     const [summary, setSummary] = useState(null);
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        if (user) {
-            fetchData(user.usuario_id); // Assuming usuario_id maps to student_id roughly or we look it up. In real app, /me/attendance is better.
-            // For mock, let's assume mapping logic is handled or we pass ID 1 for test if user.rol is student
-        }
-    }, [user]);
 
     const fetchData = async (userId) => {
         setLoading(true);
@@ -35,7 +26,14 @@ const StudentAttendancePage = () => {
         }
     };
 
-    if (loading) return <div className="p-8 text-center text-slate-500">Cargando asistencia...</div>;
+    useEffect(() => {
+        if (user) {
+            fetchData(user.usuario_id); // Assuming usuario_id maps to student_id roughly or we look it up. In real app, /me/attendance is better.
+            // For mock, let's assume mapping logic is handled or we pass ID 1 for test if user.rol is student
+        }
+    }, [user]);
+
+    if (loading) {return <div className="p-8 text-center text-slate-500">Cargando asistencia...</div>;}
 
     return (
         <div className="space-y-6">

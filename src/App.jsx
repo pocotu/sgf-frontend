@@ -12,6 +12,8 @@ import GroupsPage from './pages/dashboard/groups/GroupsPage';
 import GroupDetailPage from './pages/dashboard/groups/GroupDetailPage';
 import GroupAttendancePage from './pages/dashboard/groups/GroupAttendancePage';
 import StudentAttendancePage from './pages/dashboard/students/StudentAttendancePage';
+import EvaluationsPage from './pages/dashboard/evaluations/EvaluationsPage';
+import GradesRegisterPage from './pages/dashboard/grades/GradesRegisterPage';
 // import RegisterPage from './pages/auth/RegisterPage'; // To be implemented
 
 // Guard component to protect routes
@@ -51,6 +53,8 @@ function App() {
           <Route path="estudiantes" element={<StudentsPage />} />
           <Route path="estudiantes/:id" element={<StudentDetailPage />} />
           <Route path="cursos" element={<CoursesPage />} />
+          <Route path="evaluaciones" element={<EvaluationsPage />} />
+          <Route path="notas" element={<GradesRegisterPage />} />
           <Route path="grupos" element={<GroupsPage />} />
           <Route path="grupos/:id" element={<GroupDetailPage />} />
           <Route path="grupos/:id/asistencia" element={<GroupAttendancePage />} />

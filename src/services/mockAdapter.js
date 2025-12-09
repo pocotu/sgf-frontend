@@ -42,6 +42,7 @@ export const mockRequest = (config) => {
       const parsedData = data ? JSON.parse(data) : {};
       const params = config.params || {}; // Safe access
 
+      // eslint-disable-next-line no-console
       console.log(`[MOCK] ${method.toUpperCase()} ${url}`, params);
 
       // --- AUTH ---
@@ -58,7 +59,7 @@ export const mockRequest = (config) => {
             message: 'Inicio de sesión exitoso'
           });
         } else {
-          reject({ response: { status: 401, data: { success: false, message: 'Credenciales inválidas' } } });
+          reject(new Error(JSON.stringify({ response: { status: 401, data: { success: false, message: 'Credenciales inválidas' } } })));
         }
         return;
       }
@@ -197,7 +198,7 @@ export const mockRequest = (config) => {
 
          let filtered = enrollments;
          if (config.params && config.params.grupo_id) {
-             filtered = enrollments.filter(e => e.grupo_id == config.params.grupo_id);
+             filtered = enrollments.filter(e => e.grupo_id === parseInt(config.params.grupo_id));
          }
          
          resolve({ success: true, data: filtered });
@@ -220,13 +221,14 @@ export const mockRequest = (config) => {
              message: 'Estudiante matriculado exitosamente'
          });
          return;
-         return;
       }
 
       // --- ATTENDANCE ---
       if (url === '/asistencias' && method === 'get') {
-         // Mock generic attendance data if needed, or return empty list for now
-         // Real app would filter by group_id and date
+         /*
+          * Mock generic attendance data if needed, or return empty list for now
+          * Real app would filter by group_id and date
+          */
          resolve({ 
              success: true, 
              data: [] 
@@ -266,8 +268,49 @@ export const mockRequest = (config) => {
          return;
       }
 
+      // --- EVALUATIONS ---
+      if (url === '/evaluaciones' && method === 'get') {
+         const evaluations = [
+            { evaluacion_id: 1, nombre: 'Examen de Entrada', tipo: 'SIMULACRO', fecha_programada: '2025-08-15', estado: 'FINALIZADA' },
+            { evaluacion_id: 2, nombre: 'Primer Parcial (Área A)', tipo: 'PARCIAL', fecha_programada: '2025-09-15', estado: 'PROGRAMADA' },
+            { evaluacion_id: 3, nombre: 'Simulacro General #1', tipo: 'SIMULACRO', fecha_programada: '2025-09-30', estado: 'PROGRAMADA' }
+         ];
+         resolve({ success: true, data: evaluations });
+         return;
+      }
+
+      if (url === '/evaluaciones' && method === 'post') {
+         const data = JSON.parse(config.data);
+         resolve({
+             success: true,
+             message: 'Evaluación programada con éxito',
+             data: {
+                 evaluacion_id: Math.floor(Math.random() * 1000),
+                 ...data,
+                 estado: 'PROGRAMADA'
+             }
+         });
+         return;
+      }
+
+      // --- GRADES ---
+      if (url === '/notas' && method === 'get') {
+         // Mock grades
+         resolve({ success: true, data: [] });
+         return;
+      }
+
+      if (url === '/notas' && method === 'post') {
+         resolve({
+             success: true,
+             message: 'Notas registradas correctamente',
+             data: {}
+         });
+         return;
+      }
+
       // Default 404
-      reject({ response: { status: 404, data: { success: false, message: 'Endpoint no encontrado con mock' } } });
+      reject(new Error(JSON.stringify({ response: { status: 404, data: { success: false, message: 'Endpoint no encontrado con mock' } } })));
     }, 500); // Simulate network latency
   });
 };

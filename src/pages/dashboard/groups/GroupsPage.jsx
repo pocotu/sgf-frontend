@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GroupService } from '../../../services/group.service';
-import Card from '../../../components/ui/Card';
-import Badge from '../../../components/ui/Badge';
-import Button from '../../../components/ui/Button';
+
 
 const GroupsPage = () => {
   const navigate = useNavigate();
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchGroups();
-  }, []);
 
   const fetchGroups = async () => {
     setLoading(true);
@@ -22,11 +16,15 @@ const GroupsPage = () => {
         setGroups(response.data);
       }
     } catch (error) {
-      console.error("Error fetching groups:", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchGroups();
+  }, []);
 
   return (
     <div className="space-y-6">

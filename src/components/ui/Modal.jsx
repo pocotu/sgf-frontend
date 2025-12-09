@@ -15,7 +15,7 @@ const Modal = ({ isOpen, onClose, title, children, footer }) => {
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {return null;}
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">

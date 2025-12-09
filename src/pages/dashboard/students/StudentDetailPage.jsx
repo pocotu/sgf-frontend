@@ -1,6 +1,7 @@
+```javascript
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { StudentService } from '../../../services/student.service';
 import Card from '../../../components/ui/Card';
 import Badge from '../../../components/ui/Badge';
 import Button from '../../../components/ui/Button';
@@ -12,10 +13,12 @@ const StudentDetailPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock fetching single student
-    // In a real app we would call StudentService.getStudentById(id)
-    // For now, since mockAdapter doesn't support :id params well without regex, we manually mock here or fix adapter
-    // Let's implement a simple direct fetch assuming the service handles it or we mock the object directly
+    /*
+     * Mock fetching single student
+     * In a real app we would call StudentService.getStudentById(id)
+     * For now, since mockAdapter doesn't support :id params well without regex, we manually mock here or fix adapter
+     * Let's implement a simple direct fetch assuming the service handles it or we mock the object directly
+     */
     
     // Simulate fetch
     setTimeout(() => {
@@ -33,8 +36,8 @@ const StudentDetailPage = () => {
     }, 500);
   }, [id]);
 
-  if (loading) return <div className="p-8 text-center text-slate-500">Cargando perfil...</div>;
-  if (!student) return <div className="p-8 text-center text-red-500">Estudiante no encontrado</div>;
+  if (loading) {return <div className="p-8 text-center text-slate-500">Cargando perfil...</div>;}
+  if (!student) {return <div className="p-8 text-center text-red-500">Estudiante no encontrado</div>;}
 
   return (
     <div className="space-y-6">

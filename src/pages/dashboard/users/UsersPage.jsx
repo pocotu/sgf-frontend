@@ -1,34 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { UserService } from '../../../services/user.service';
-import Table, { TableRow, TableCell } from '../../../components/ui/Table';
-import Badge from '../../../components/ui/Badge';
-import Card from '../../../components/ui/Card';
-import Button from '../../../components/ui/Button';
-import Input from '../../../components/ui/Input';
+
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ rol: '', page: 1, limit: 10 });
 
-  useEffect(() => {
-    fetchUsers();
-  }, [filters]);
-
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const response = await UserService.getUsers(filters);
+      const response = await UserService.getUsers();
       if (response.success) {
         setUsers(response.data.usuarios);
-        // Pagination logic would use response.data.pagination here
       }
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const roleColors = {
     admin: 'admin',

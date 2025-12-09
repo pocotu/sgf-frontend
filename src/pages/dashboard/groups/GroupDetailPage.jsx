@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Button from '../../../components/ui/Button';
-import Card from '../../../components/ui/Card';
-import Table, { TableRow, TableCell } from '../../../components/ui/Table';
-import Badge from '../../../components/ui/Badge';
 import { GroupService } from '../../../services/group.service';
 import { EnrollmentService } from '../../../services/enrollment.service';
-import EnrollmentModal from '../../../components/dashboard/enrollments/EnrollmentModal';
 
 import { useAtomValue } from 'jotai';
 import { userAtom } from '../../../store/auth.store';
@@ -20,25 +15,17 @@ const GroupDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    fetchData();
-  }, [id]);
-
   const fetchData = async () => {
     setLoading(true);
     try {
-        // Parallel fetch
-        const [groupRes, enrollRes] = await Promise.all([
-            GroupService.getGroupById(id),
-            EnrollmentService.getEnrollments({ grupo_id: id })
-        ]);
-
-        if (groupRes.success) setGroup(groupRes.data); // Mock might return array for getGroups, ensure getGroupById mock logic
-        // Mock getGroupById fallback if needed or ensure service handles it. 
-        // For now let's assume getGroupById returns single object or we filter from list if mock is simple.
-        
-        if (enrollRes.success) setEnrollments(enrollRes.data);
-
+        const groupRes = await GroupService.getGroupById(id);
+        if (groupRes.success) {
+            setGroup(groupRes.data);
+        }
+        const enrollRes = await EnrollmentService.getEnrollments({ grupo_id: id });
+        if (enrollRes.success) {
+            setEnrollments(enrollRes.data);
+        }
     } catch (error) {
         console.error("Error fetching group details", error);
     } finally {
@@ -50,7 +37,7 @@ const GroupDetailPage = () => {
       fetchData(); // Reload data
   };
 
-  if (loading) return <div className="p-8 text-center text-slate-500">Cargando grupo...</div>;
+  if (loading) {return <div className="p-8 text-center text-slate-500">Cargando grupo...</div>;}
 
   return (
     <div className="space-y-6">

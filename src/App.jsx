@@ -1,95 +1,67 @@
-import { useState, useEffect } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import AuthLayout from './components/layouts/AuthLayout';
+import DashboardLayout from './components/layouts/DashboardLayout';
+import LoginPage from './pages/auth/LoginPage';
+import DashboardPage from './pages/dashboard/DashboardPage';
+import UsersPage from './pages/dashboard/users/UsersPage';
+import StudentsPage from './pages/dashboard/students/StudentsPage';
+import StudentDetailPage from './pages/dashboard/students/StudentDetailPage';
+import CoursesPage from './pages/dashboard/courses/CoursesPage';
+import GroupsPage from './pages/dashboard/groups/GroupsPage';
+import GroupDetailPage from './pages/dashboard/groups/GroupDetailPage';
+import GroupAttendancePage from './pages/dashboard/groups/GroupAttendancePage';
+import StudentAttendancePage from './pages/dashboard/students/StudentAttendancePage';
+// import RegisterPage from './pages/auth/RegisterPage'; // To be implemented
+
+// Guard component to protect routes
+import { useAtomValue } from 'jotai';
+import { isAuthenticatedAtom } from './store/auth.store';
+
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = useAtomValue(isAuthenticatedAtom);
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" replace />;
+  }
+  return children;
+};
 
 function App() {
-  const [backendStatus, setBackendStatus] = useState('checking');
-  const [retryCount, setRetryCount] = useState(0);
-  const [isWakingUp, setIsWakingUp] = useState(false);
-
-  useEffect(() => {
-    const checkBackend = async () => {
-      try {
-        const apiUrl =
-          import.meta.env.VITE_API_URL?.replace('/api/v1', '') || 'http://localhost:3000';
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-
-        const response = await fetch(`${apiUrl}/health`, {
-          signal: controller.signal,
-        });
-        clearTimeout(timeoutId);
-
-        if (response.ok) {
-          setBackendStatus('ok');
-          setIsWakingUp(false);
-        } else {
-          setBackendStatus('error');
-        }
-      } catch (error) {
-        // Si es timeout o error de red, probablemente está dormido
-        if (error.name === 'AbortError' || error.message.includes('fetch')) {
-          setIsWakingUp(true);
-          setBackendStatus('sleeping');
-
-          // Reintentar automáticamente
-          if (retryCount < 3) {
-            setTimeout(() => {
-              setRetryCount(retryCount + 1);
-            }, 5000); // Reintentar cada 5 segundos
-          } else {
-            setBackendStatus('error');
-            setIsWakingUp(false);
-          }
-        } else {
-          setBackendStatus('error');
-        }
-      }
-    };
-
-    checkBackend();
-  }, [retryCount]);
-
-  const getStatusMessage = () => {
-    switch (backendStatus) {
-      case 'checking':
-        return 'Verificando...';
-      case 'ok':
-        return 'OK';
-      case 'sleeping':
-        return isWakingUp ? `Iniciando backend... (${retryCount + 1}/3)` : 'Inactivo';
-      case 'error':
-        return 'ERROR';
-      default:
-        return '...';
-    }
-  };
-
-  const getStatusHint = () => {
-    if (backendStatus === 'sleeping' && isWakingUp) {
-      return 'El backend esta iniciando. Esto puede tomar 30-60 segundos...';
-    }
-    return null;
-  };
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <p className={`backend-status ${backendStatus}`}>Backend: {getStatusMessage()}</p>
-        {getStatusHint() && <p className="status-hint">{getStatusHint()}</p>}
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* Redirect root to dashboard (which helps check auth) or login */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+        {/* Auth Routes */}
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<div>Registro (Pendiente)</div>} />
+          <Route index element={<Navigate to="login" replace />} />
+        </Route>
+
+        {/* Dashboard Routes (Protected) */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }>
+          <Route index element={<DashboardPage />} />
+          <Route path="usuarios" element={<UsersPage />} />
+          <Route path="estudiantes" element={<StudentsPage />} />
+          <Route path="estudiantes/:id" element={<StudentDetailPage />} />
+          <Route path="cursos" element={<CoursesPage />} />
+          <Route path="grupos" element={<GroupsPage />} />
+          <Route path="grupos/:id" element={<GroupDetailPage />} />
+          <Route path="grupos/:id/asistencia" element={<GroupAttendancePage />} />
+          <Route path="mis-asistencias" element={<StudentAttendancePage />} />
+          {/* Add more dashboard sub-routes here later */}
+        </Route>
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/auth/login" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

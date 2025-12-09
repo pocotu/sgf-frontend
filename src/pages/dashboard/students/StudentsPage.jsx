@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../../context/ToastContext';
 import { StudentService } from '../../../services/student.service';
 
 
 const StudentsPage = () => {
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ modalidad: '', area: '' });
@@ -43,7 +45,7 @@ const StudentsPage = () => {
           <h1 className="text-2xl font-bold text-slate-800">Estudiantes</h1>
           <p className="text-slate-500 text-sm">Directorio de alumnos matriculados por modalidad</p>
         </div>
-        <Button onClick={() => alert("Creación de estudiante requiere seleccionar un usuario existente (ver flujo)")}>
+        <Button onClick={() => addToast("Creación de estudiante requiere seleccionar un usuario existente (ver flujo)", 'info')}>
           + Matricular / Crear
         </Button>
       </div>

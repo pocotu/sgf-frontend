@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useToast } from '../../../context/ToastContext';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
 import Input from '../../ui/Input';
 import { EvaluationService } from '../../../services/evaluation.service';
 
 const EvaluationCreateModal = ({ isOpen, onClose, onSuccess }) => {
+  const { addToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
       nombre: '',
@@ -22,10 +24,11 @@ const EvaluationCreateModal = ({ isOpen, onClose, onSuccess }) => {
       try {
           const response = await EvaluationService.createEvaluation(formData);
           if (response.success) {
+              addToast('Evaluación programada con éxito', 'success');
               onSuccess();
               onClose();
           } else {
-              alert("Error al crear evaluación");
+              addToast("Error al crear evaluación", 'error');
           }
       } catch (error) {
           console.error("Error creating evaluation", error);

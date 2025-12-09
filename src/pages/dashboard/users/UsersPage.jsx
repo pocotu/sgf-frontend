@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useToast } from '../../../context/ToastContext';
 import { UserService } from '../../../services/user.service';
 
 
 const UsersPage = () => {
+  const { addToast } = useToast();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ rol: '', page: 1, limit: 10 });
@@ -38,7 +40,7 @@ const UsersPage = () => {
           <h1 className="text-2xl font-bold text-slate-800">Gestión de Usuarios</h1>
           <p className="text-slate-500 text-sm">Administra los accesos y roles del sistema</p>
         </div>
-        <Button onClick={() => alert("Registro solo para Admin (ver contrato auth/register)")}>
+        <Button onClick={() => addToast("Registro solo para Admin (ver contrato auth/register)", 'info')}>
           + Nuevo Usuario
         </Button>
       </div>

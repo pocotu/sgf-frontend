@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useToast } from '../../../context/ToastContext';
 
 import { EnrollmentService } from '../../../services/enrollment.service';
 
@@ -9,6 +10,7 @@ import { AttendanceService } from '../../../services/attendance.service';
 const GroupAttendancePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const [group, setGroup] = useState(null);
   const [students, setStudents] = useState([]);
   const [attendanceData, setAttendanceData] = useState({});
@@ -71,14 +73,14 @@ const GroupAttendancePage = () => {
 
           const response = await AttendanceService.registerAttendance(payload);
           if (response.success) {
-              alert('Asistencia registrada con éxito');
+              addToast('Asistencia registrada con éxito', 'success');
               navigate(`/dashboard/grupos/${id}`);
           } else {
-              alert('Error al guardar asistencia');
+              addToast('Error al guardar asistencia', 'error');
           }
       } catch (error) {
           console.error("Error saving attendance", error);
-          alert("Hubo un error al guardar");
+          addToast("Hubo un error al guardar", 'error');
       } finally {
           setSaving(false);
       }

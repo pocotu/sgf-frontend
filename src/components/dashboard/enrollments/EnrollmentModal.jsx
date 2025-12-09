@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useToast } from '../../../context/ToastContext';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
 import Input from '../../ui/Input';
@@ -6,6 +7,7 @@ import { EnrollmentService } from '../../../services/enrollment.service';
 import { StudentService } from '../../../services/student.service';
 
 const EnrollmentModal = ({ isOpen, onClose, groupId, onSuccess }) => {
+  const { addToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [selectedStudentIds, setSelectedStudentIds] = useState([]); 
@@ -47,25 +49,27 @@ const EnrollmentModal = ({ isOpen, onClose, groupId, onSuccess }) => {
       setLoading(true);
       try {
           // Serialize requests for bulk enrollment
-          let successCount = 0;
-          for (const studentId of selectedStudentIds) {
-              const response = await EnrollmentService.createEnrollment({
+          const enrollmentPromises = selectedStudentIds.map(studentId => 
+              EnrollmentService.createEnrollment({
                   estudiante_id: studentId,
                   grupo_id: groupId,
                   monto_pagado: 500
-              });
-              if (response.success || response.data) {successCount++;}
-          }
+              })
+          );
+          
+          const responses = await Promise.all(enrollmentPromises);
+          const successCount = responses.filter(r => r.success || r.data).length;
           
           if (successCount > 0) {
+              addToast(`Se matricularon ${successCount} estudiantes`, 'success');
               onSuccess();
               onClose();
           } else {
-              alert("Error al matricular");
+              addToast("Error al matricular", 'error');
           }
       } catch (error) {
           console.error("Error enrolling", error);
-          alert("Ocurrió un error en el proceso de matrícula");
+          addToast("Ocurrió un error en el proceso de matrícula", 'error');
       } finally {
           setLoading(false);
       }

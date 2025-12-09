@@ -280,13 +280,13 @@ export const mockRequest = (config) => {
       }
 
       if (url === '/evaluaciones' && method === 'post') {
-         const data = JSON.parse(config.data);
+         const evaluationData = JSON.parse(config.data);
          resolve({
              success: true,
              message: 'Evaluación programada con éxito',
              data: {
                  evaluacion_id: Math.floor(Math.random() * 1000),
-                 ...data,
+                 ...evaluationData,
                  estado: 'PROGRAMADA'
              }
          });

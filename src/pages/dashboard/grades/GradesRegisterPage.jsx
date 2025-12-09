@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useToast } from '../../../context/ToastContext';
 import { EvaluationService } from '../../../services/evaluation.service';
 import { GroupService } from '../../../services/group.service';
 import { EnrollmentService } from '../../../services/enrollment.service';
 import { GradeService } from '../../../services/grade.service';
 
 const GradesRegisterPage = () => {
+    const { addToast } = useToast();
     const [evaluations, setEvaluations] = useState([]);
     const [groups, setGroups] = useState([]);
     const [students, setStudents] = useState([]);
@@ -76,14 +78,14 @@ const GradesRegisterPage = () => {
             });
 
             if (response.success) {
-                alert("Notas guardadas correctamente");
+                addToast("Notas guardadas correctamente", 'success');
                 // Reset or navigate?
             } else {
-                alert("Error al guardar");
+                addToast("Error al guardar", 'error');
             }
         } catch (error) {
             console.error(error);
-            alert("Error al guardar");
+            addToast("Error al guardar", 'error');
         } finally {
             setLoading(false);
         }

@@ -1,5 +1,3 @@
-```javascript
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Card from '../../../components/ui/Card';

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useToast } from '../../../context/ToastContext';
 import { CourseService } from '../../../services/course.service';
 
 const CoursesPage = () => {
+  const { addToast } = useToast();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedArea, setSelectedArea] = useState('');
@@ -41,7 +43,7 @@ const CoursesPage = () => {
           <h1 className="text-2xl font-bold text-slate-800">Cursos</h1>
           <p className="text-slate-500 text-sm">Catálogo de materias por área</p>
         </div>
-        <Button onClick={() => alert("Solo Admin")}>+ Nuevo Curso</Button>
+        <Button onClick={() => addToast("Funcionalidad solo para administradores", 'info')}>+ Nuevo Curso</Button>
       </div>
 
       <div className="flex gap-2 pb-2 overflow-x-auto">

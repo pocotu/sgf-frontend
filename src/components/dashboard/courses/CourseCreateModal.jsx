@@ -21,8 +21,10 @@ const CourseCreateModal = ({ isOpen, onClose, onSuccess }) => {
   const handleSubmit = async () => {
       setLoading(true);
       try {
-          // Assuming CourseService has createCourse, if not I need to check service file.
-          // Based on API Contract: POST /cursos
+          /*
+           * Assuming CourseService has createCourse, if not I need to check service file.
+           * Based on API Contract: POST /cursos
+           */
           const response = await CourseService.createCourse(formData);
           if (response.success) {
               addToast('Curso creado exitosamente', 'success');

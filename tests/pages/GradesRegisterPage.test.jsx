@@ -40,10 +40,12 @@ describe('GradesRegisterPage', () => {
          GroupService.getGroups.mockResolvedValue({ success: true, data: [] });
          render(<GradesRegisterPage />);
          
-         // Evaluation select is second select
-         // We can find by label "2. Seleccionar Evaluación"
-         // Actually finding by text might be tricky if label structure changes
-         // Let's rely on disabled attribute behaviour
+         /*
+          * Evaluation select is second select
+          * We can find by label "2. Seleccionar Evaluación"
+          * Actually finding by text might be tricky if label structure changes
+          * Let's rely on disabled attribute behaviour
+          */
          const evalSelects = screen.getAllByRole('combobox');
          // 2nd one should be disabled
          expect(evalSelects[1]).toBeDisabled();

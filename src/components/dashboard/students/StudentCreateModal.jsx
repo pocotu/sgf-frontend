@@ -16,9 +16,11 @@ const StudentCreateModal = ({ isOpen, onClose, onSuccess }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [modality, setModality] = useState('ORDINARIO');
 
-  // Load potential candidates (users with role 'estudiante' but maybe not registered in student table distinctively, 
-  // or just any user we want to promote. API Contract says POST /estudiantes requires usuario_id.
-  // We'll fetch all users for selection.
+  /*
+   * Load potential candidates (users with role 'estudiante' but maybe not registered in student table distinctively, 
+   * or just any user we want to promote. API Contract says POST /estudiantes requires usuario_id.
+   * We'll fetch all users for selection.
+   */
   const fetchUsers = async () => {
       try {
           const res = await UserService.getUsers(); // Assuming this lists all users
@@ -40,16 +42,16 @@ const StudentCreateModal = ({ isOpen, onClose, onSuccess }) => {
   }, [isOpen]);
 
   useEffect(() => {
-    if (!users) return;
+    if (!users) {return;}
     const term = searchTerm.toLowerCase();
     setFilteredUsers(users.filter(u => 
-        (u.nombres + ' ' + u.apellidos).toLowerCase().includes(term) ||
+        (`${u.nombres  } ${  u.apellidos}`).toLowerCase().includes(term) ||
         u.dni.includes(term)
     ));
   }, [searchTerm, users]);
 
   const handleSubmit = async () => {
-      if (!selectedUser) return;
+      if (!selectedUser) {return;}
       setLoading(true);
       try {
           const response = await StudentService.createStudent({

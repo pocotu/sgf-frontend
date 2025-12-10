@@ -6,7 +6,7 @@ import Card from '../../../components/ui/Card';
 import Button from '../../../components/ui/Button';
 import Table, { TableRow, TableCell } from '../../../components/ui/Table';
 import Badge from '../../../components/ui/Badge';
-
+import StudentCreateModal from '../../../components/dashboard/students/StudentCreateModal';
 
 const StudentsPage = () => {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ const StudentsPage = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ modalidad: '', area: '' });
+  const [showModal, setShowModal] = useState(false);
 
   const fetchStudents = async () => {
     setLoading(true);
@@ -49,8 +50,8 @@ const StudentsPage = () => {
           <h1 className="text-2xl font-bold text-slate-800">Estudiantes</h1>
           <p className="text-slate-500 text-sm">Directorio de alumnos matriculados por modalidad</p>
         </div>
-        <Button onClick={() => addToast("Creación de estudiante requiere seleccionar un usuario existente (ver flujo)", 'info')}>
-          + Matricular / Crear
+        <Button onClick={() => setShowModal(true)}>
+          + Registrar Estudiante
         </Button>
       </div>
 
@@ -116,6 +117,12 @@ const StudentsPage = () => {
           )}
         </Table>
       </Card>
+
+      <StudentCreateModal 
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onSuccess={fetchStudents}
+      />
     </div>
   );
 };

@@ -2,7 +2,8 @@ import axios from 'axios';
 import { mockRequest } from './mockAdapter';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
-const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true' || true; // Default to true for now
+// Force mock only if explicitly true in env, otherwise false (allowing backend connection)
+const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
 
 const api = axios.create({
   baseURL: API_URL,

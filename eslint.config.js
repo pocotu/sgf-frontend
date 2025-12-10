@@ -68,7 +68,7 @@ export default [
         'warn',
         {
           argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_|^(React|StrictMode|App)$',
+          varsIgnorePattern: '^_|^(React|StrictMode|App|[A-Z][a-zA-Z]+)$',
           caughtErrors: 'all',
           caughtErrorsIgnorePattern: '^_',
           ignoreRestSiblings: true,

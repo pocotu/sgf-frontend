@@ -16,9 +16,11 @@ const StudentGradesPage = () => {
             if (!user?.id) { return; }
             setLoading(true);
             try {
-                // In a real API we might have specific endpoint /estudiantes/:id/notas
-                // For now we get enrollments which should contain course info and potentially grades
-                // Or we mock the grade data structure here as per plan
+                /*
+                 * In a real API we might have specific endpoint /estudiantes/:id/notas
+                 * For now we get enrollments which should contain course info and potentially grades
+                 * Or we mock the grade data structure here as per plan
+                 */
                 const response = await EnrollmentService.getEnrollments({ estudiante_id: user.id });
                 if (response.success) {
                     setEnrollments(response.data.map(enr => ({

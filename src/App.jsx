@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider, useAtomValue } from 'jotai';
 import { ToastProvider } from './context/ToastContext';
 import { isAuthenticatedAtom } from './store/auth.store';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 import AuthLayout from './components/layouts/AuthLayout';
 import DashboardLayout from './components/layouts/DashboardLayout';
@@ -18,6 +19,9 @@ import GroupAttendancePage from './pages/dashboard/groups/GroupAttendancePage';
 import StudentAttendancePage from './pages/dashboard/students/StudentAttendancePage';
 import EvaluationsPage from './pages/dashboard/evaluations/EvaluationsPage';
 import GradesRegisterPage from './pages/dashboard/grades/GradesRegisterPage';
+import StudentGradesPage from './pages/dashboard/grades/StudentGradesPage';
+import RankingsPage from './pages/dashboard/reports/RankingsPage';
+import ReportsPage from './pages/dashboard/reports/ReportsPage';
 
 // Guard component to protect routes
 const ProtectedRoute = ({ children }) => {
@@ -33,7 +37,8 @@ function App() {
     <Provider>
       <ToastProvider>
         <BrowserRouter>
-          <Routes>
+          <ErrorBoundary>
+            <Routes>
             {/* Redirect root to dashboard (which helps check auth) or login */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
@@ -61,11 +66,15 @@ function App() {
               <Route path="grupos/:id" element={<GroupDetailPage />} />
               <Route path="grupos/:id/asistencia" element={<GroupAttendancePage />} />
               <Route path="mis-asistencias" element={<StudentAttendancePage />} />
+          <Route path="mis-notas" element={<StudentGradesPage />} />
+          <Route path="rankings" element={<RankingsPage />} />
+          <Route path="reportes" element={<ReportsPage />} />
             </Route>
 
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/auth/login" replace />} />
           </Routes>
+          </ErrorBoundary>
         </BrowserRouter>
       </ToastProvider>
     </Provider>

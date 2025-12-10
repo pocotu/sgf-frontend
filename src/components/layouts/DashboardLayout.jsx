@@ -19,7 +19,6 @@ const DashboardLayout = () => {
     { name: 'Inicio', path: '/dashboard', icon: '🏠' },
     { name: 'Usuarios', path: '/dashboard/usuarios', icon: '👥', roles: ['admin'] },
     { name: 'Estudiantes', path: '/dashboard/estudiantes', icon: '🎓', roles: ['admin', 'docente'] },
-    { name: 'Estudiantes', path: '/dashboard/estudiantes', icon: '🎓', roles: ['admin', 'docente'] },
     { name: 'Cursos', path: '/dashboard/cursos', icon: '📚' },
     { name: 'Grupos', path: '/dashboard/grupos', icon: '🏫', roles: ['admin', 'docente'] },
     { name: 'Evaluaciones', path: '/dashboard/evaluaciones', icon: '📝' },

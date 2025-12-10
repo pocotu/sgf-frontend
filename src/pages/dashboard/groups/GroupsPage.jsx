@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GroupService } from '../../../services/group.service';
+import { useToast } from '../../../context/ToastContext';
+import Card from '../../../components/ui/Card';
+import Button from '../../../components/ui/Button';
+import Badge from '../../../components/ui/Badge';
 
 
 const GroupsPage = () => {
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +38,9 @@ const GroupsPage = () => {
           <h1 className="text-2xl font-bold text-slate-800">Grupos de Estudio</h1>
           <p className="text-slate-500 text-sm">Gestión de aulas y horarios</p>
         </div>
-        <Button>+ Nuevo Grupo</Button>
+        <Button onClick={() => addToast("Funcionalidad solo para administradores (ver contrato)", 'info')}>
+          + Nuevo Grupo
+        </Button>
       </div>
 
       {loading ? (

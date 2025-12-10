@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import { userAtom } from '../../../store/auth.store';
 import { EvaluationService } from '../../../services/evaluation.service';
+import Card from '../../../components/ui/Card';
+import Button from '../../../components/ui/Button';
+import Table, { TableRow, TableCell } from '../../../components/ui/Table';
+import Badge from '../../../components/ui/Badge';
+import EvaluationCreateModal from '../../../components/dashboard/evaluations/EvaluationCreateModal';
 
 const EvaluationsPage = () => {
   const user = useAtomValue(userAtom);

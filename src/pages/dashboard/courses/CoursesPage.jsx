@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from '../../../context/ToastContext';
 import { CourseService } from '../../../services/course.service';
+import Card from '../../../components/ui/Card';
+import Button from '../../../components/ui/Button';
+import Badge from '../../../components/ui/Badge';
 
 const CoursesPage = () => {
   const { addToast } = useToast();

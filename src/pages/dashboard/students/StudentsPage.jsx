@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../../../context/ToastContext';
 import { StudentService } from '../../../services/student.service';
+import Card from '../../../components/ui/Card';
+import Button from '../../../components/ui/Button';
+import Table, { TableRow, TableCell } from '../../../components/ui/Table';
+import Badge from '../../../components/ui/Badge';
 
 
 const StudentsPage = () => {

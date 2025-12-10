@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from '../../../context/ToastContext';
 import { UserService } from '../../../services/user.service';
+import Card from '../../../components/ui/Card';
+import Button from '../../../components/ui/Button';
+import Table, { TableRow, TableCell } from '../../../components/ui/Table';
+import Badge from '../../../components/ui/Badge';
 
 
 const UsersPage = () => {

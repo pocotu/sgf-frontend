@@ -4,6 +4,9 @@ import { EvaluationService } from '../../../services/evaluation.service';
 import { GroupService } from '../../../services/group.service';
 import { EnrollmentService } from '../../../services/enrollment.service';
 import { GradeService } from '../../../services/grade.service';
+import Card from '../../../components/ui/Card';
+import Button from '../../../components/ui/Button';
+import Table, { TableRow, TableCell } from '../../../components/ui/Table';
 
 const GradesRegisterPage = () => {
     const { addToast } = useToast();

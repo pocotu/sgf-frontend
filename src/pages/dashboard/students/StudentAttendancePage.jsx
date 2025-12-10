@@ -1,8 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import { userAtom } from '../../../store/auth.store';
 import { AttendanceService } from '../../../services/attendance.service';
+import Card from '../../../components/ui/Card';
+import Table, { TableRow, TableCell } from '../../../components/ui/Table';
+import Badge from '../../../components/ui/Badge';
 
 const StudentAttendancePage = () => {
     const user = useAtomValue(userAtom);
@@ -10,7 +12,7 @@ const StudentAttendancePage = () => {
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchData = async (userId) => {
+    const fetchData = async () => {
         setLoading(true);
         try {
             // Mock: Get summary

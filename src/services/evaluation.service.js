@@ -25,5 +25,5 @@ export const EvaluationService = {
   async getEvaluationById(id) {
     const response = await api.get(`/evaluaciones/${id}`);
     return response.data;
-  }
+  },
 };

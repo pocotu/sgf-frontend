@@ -2,7 +2,9 @@ import React from 'react';
 
 const Table = ({ headers, children, className = '' }) => {
   return (
-    <div className={`overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white/50 backdrop-blur-sm ${className}`}>
+    <div
+      className={`overflow-x-auto rounded-xl border border-slate-200 shadow-sm bg-white/50 backdrop-blur-sm ${className}`}
+    >
       <table className="w-full text-sm text-left">
         <thead className="text-xs text-slate-500 uppercase bg-slate-50/80 border-b border-slate-200">
           <tr>
@@ -13,9 +15,7 @@ const Table = ({ headers, children, className = '' }) => {
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100">
-          {children}
-        </tbody>
+        <tbody className="divide-y divide-slate-100">{children}</tbody>
       </table>
     </div>
   );
@@ -23,15 +23,11 @@ const Table = ({ headers, children, className = '' }) => {
 
 // Subcomponent for typical row usage if needed, or just use tr/td directly in parent
 export const TableRow = ({ children, className = '' }) => (
-  <tr className={`hover:bg-slate-50/50 transition-colors ${className}`}>
-    {children}
-  </tr>
+  <tr className={`hover:bg-slate-50/50 transition-colors ${className}`}>{children}</tr>
 );
 
 export const TableCell = ({ children, className = '' }) => (
-  <td className={`px-6 py-4 whitespace-nowrap text-slate-700 ${className}`}>
-    {children}
-  </td>
+  <td className={`px-6 py-4 whitespace-nowrap text-slate-700 ${className}`}>{children}</td>
 );
 
 export default Table;

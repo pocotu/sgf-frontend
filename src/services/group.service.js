@@ -8,8 +8,12 @@ export const GroupService = {
   async getGroups(params = {}) {
     // If params.modalidad or params.area is empty string, delete them to avoid sending empty filters if backend strictly checks
     const cleanParams = { ...params };
-    if (!cleanParams.modalidad) {delete cleanParams.modalidad;}
-    if (!cleanParams.area) {delete cleanParams.area;}
+    if (!cleanParams.modalidad) {
+      delete cleanParams.modalidad;
+    }
+    if (!cleanParams.area) {
+      delete cleanParams.area;
+    }
 
     const response = await api.get('/grupos', { params: cleanParams });
     return response.data;
@@ -17,7 +21,7 @@ export const GroupService = {
 
   /**
    * Obtener grupo por ID
-   * @param {number} id 
+   * @param {number} id
    */
   async getGroupById(id) {
     const response = await api.get(`/grupos/${id}`);
@@ -27,5 +31,5 @@ export const GroupService = {
   async createGroup(data) {
     const response = await api.post('/grupos', data);
     return response.data;
-  }
+  },
 };

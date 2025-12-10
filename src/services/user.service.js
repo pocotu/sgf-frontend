@@ -12,7 +12,7 @@ export const UserService = {
 
   /**
    * Obtener usuario por ID
-   * @param {number} id 
+   * @param {number} id
    */
   async getUserById(id) {
     const response = await api.get(`/usuarios/${id}`);
@@ -21,11 +21,11 @@ export const UserService = {
 
   /**
    * Actualizar usuario
-   * @param {number} id 
+   * @param {number} id
    * @param {Object} data - { nombres, apellidos, correo, telefono }
    */
   async updateUser(id, data) {
     const response = await api.put(`/usuarios/${id}`, data);
     return response.data;
-  }
+  },
 };

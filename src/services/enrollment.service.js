@@ -17,5 +17,5 @@ export const EnrollmentService = {
   async createEnrollment(data) {
     const response = await api.post('/matriculas', data);
     return response.data;
-  }
+  },
 };

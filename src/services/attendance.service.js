@@ -23,7 +23,7 @@ export const AttendanceService = {
    * Obtener resumen de asistencia de un estudiante
    */
   async getStudentAttendanceSummary(estudianteId) {
-      const response = await api.get(`/asistencias/estudiante/${estudianteId}/resumen`);
-      return response.data;
-  }
+    const response = await api.get(`/asistencias/estudiante/${estudianteId}/resumen`);
+    return response.data;
+  },
 };

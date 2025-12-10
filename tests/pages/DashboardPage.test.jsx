@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import DashboardPage from '@/pages/dashboard/DashboardPage';
-import { userAtom } from '@/store/auth.store';
 import { useAtomValue } from 'jotai';
 
 // Mock child components

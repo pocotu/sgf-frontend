@@ -10,12 +10,12 @@ import Button from '../../components/ui/Button';
 const LoginPage = () => {
   const navigate = useNavigate();
   const setUser = useSetAtom(userAtom);
-  
+
   const [formData, setFormData] = useState({ dni: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -49,17 +49,17 @@ const LoginPage = () => {
           type="text"
           placeholder="Ingresa tu DNI"
           value={formData.dni}
-          onChange={(e) => setFormData({...formData, dni: e.target.value})}
+          onChange={e => setFormData({ ...formData, dni: e.target.value })}
           disabled={loading}
           required
         />
-        
+
         <Input
           label="Contraseña"
           type="password"
           placeholder="••••••••"
           value={formData.password}
-          onChange={(e) => setFormData({...formData, password: e.target.value})}
+          onChange={e => setFormData({ ...formData, password: e.target.value })}
           disabled={loading}
           required
         />
@@ -70,12 +70,7 @@ const LoginPage = () => {
           </div>
         )}
 
-        <Button 
-          type="submit" 
-          className="w-full" 
-          size="lg"
-          loading={loading}
-        >
+        <Button type="submit" className="w-full" size="lg" loading={loading}>
           Iniciar Sesión
         </Button>
       </form>

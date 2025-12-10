@@ -36,7 +36,7 @@ describe('GradesRegisterPage', () => {
         });
     });
 
-    it('disables evaluation select initially', async () => {
+    it('disables evaluation select initially', () => {
          GroupService.getGroups.mockResolvedValue({ success: true, data: [] });
          render(<GradesRegisterPage />);
          

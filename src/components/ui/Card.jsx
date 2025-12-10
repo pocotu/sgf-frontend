@@ -10,9 +10,7 @@ const Card = ({ children, className = '', title, footer }) => {
       )}
       <div>{children}</div>
       {footer && (
-        <div className="mt-6 pt-4 border-t border-slate-200/60 flex justify-end">
-          {footer}
-        </div>
+        <div className="mt-6 pt-4 border-t border-slate-200/60 flex justify-end">{footer}</div>
       )}
     </div>
   );

@@ -12,7 +12,7 @@ export const StudentService = {
 
   /**
    * Obtener estudiante por ID
-   * @param {number} id 
+   * @param {number} id
    */
   async getStudentById(id) {
     const response = await api.get(`/estudiantes/${id}`);
@@ -26,5 +26,5 @@ export const StudentService = {
   async createStudent(data) {
     const response = await api.post('/estudiantes', data);
     return response.data;
-  }
+  },
 };

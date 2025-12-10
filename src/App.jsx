@@ -39,41 +39,44 @@ function App() {
         <BrowserRouter>
           <ErrorBoundary>
             <Routes>
-            {/* Redirect root to dashboard (which helps check auth) or login */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              {/* Redirect root to dashboard (which helps check auth) or login */}
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-            {/* Auth Routes */}
-            <Route path="/auth" element={<AuthLayout />}>
-              <Route path="login" element={<LoginPage />} />
-              <Route path="register" element={<div>Registro (Pendiente)</div>} />
-              <Route index element={<Navigate to="login" replace />} />
-            </Route>
+              {/* Auth Routes */}
+              <Route path="/auth" element={<AuthLayout />}>
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<div>Registro (Pendiente)</div>} />
+                <Route index element={<Navigate to="login" replace />} />
+              </Route>
 
-            {/* Dashboard Routes (Protected) */}
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <DashboardLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<DashboardPage />} />
-              <Route path="usuarios" element={<UsersPage />} />
-              <Route path="estudiantes" element={<StudentsPage />} />
-              <Route path="estudiantes/:id" element={<StudentDetailPage />} />
-              <Route path="cursos" element={<CoursesPage />} />
-              <Route path="evaluaciones" element={<EvaluationsPage />} />
-              <Route path="notas" element={<GradesRegisterPage />} />
-              <Route path="grupos" element={<GroupsPage />} />
-              <Route path="grupos/:id" element={<GroupDetailPage />} />
-              <Route path="grupos/:id/asistencia" element={<GroupAttendancePage />} />
-              <Route path="mis-asistencias" element={<StudentAttendancePage />} />
-          <Route path="mis-notas" element={<StudentGradesPage />} />
-          <Route path="rankings" element={<RankingsPage />} />
-          <Route path="reportes" element={<ReportsPage />} />
-            </Route>
+              {/* Dashboard Routes (Protected) */}
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<DashboardPage />} />
+                <Route path="usuarios" element={<UsersPage />} />
+                <Route path="estudiantes" element={<StudentsPage />} />
+                <Route path="estudiantes/:id" element={<StudentDetailPage />} />
+                <Route path="cursos" element={<CoursesPage />} />
+                <Route path="evaluaciones" element={<EvaluationsPage />} />
+                <Route path="notas" element={<GradesRegisterPage />} />
+                <Route path="grupos" element={<GroupsPage />} />
+                <Route path="grupos/:id" element={<GroupDetailPage />} />
+                <Route path="grupos/:id/asistencia" element={<GroupAttendancePage />} />
+                <Route path="mis-asistencias" element={<StudentAttendancePage />} />
+                <Route path="mis-notas" element={<StudentGradesPage />} />
+                <Route path="rankings" element={<RankingsPage />} />
+                <Route path="reportes" element={<ReportsPage />} />
+              </Route>
 
-            {/* Fallback */}
-            <Route path="*" element={<Navigate to="/auth/login" replace />} />
-          </Routes>
+              {/* Fallback */}
+              <Route path="*" element={<Navigate to="/auth/login" replace />} />
+            </Routes>
           </ErrorBoundary>
         </BrowserRouter>
       </ToastProvider>

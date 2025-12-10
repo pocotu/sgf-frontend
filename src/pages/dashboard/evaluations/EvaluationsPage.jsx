@@ -22,7 +22,7 @@ const EvaluationsPage = () => {
         setEvaluations(response.data);
       }
     } catch (error) {
-      console.error("Error fetching evaluations", error);
+      console.error('Error fetching evaluations', error);
     } finally {
       setLoading(false);
     }
@@ -32,14 +32,19 @@ const EvaluationsPage = () => {
     fetchEvaluations();
   }, []);
 
-  const statusVariant = (status) => {
-      switch(status) {
-          case 'PROGRAMADA': return 'warning';
-          case 'EN_CURSO': return 'activo';
-          case 'FINALIZADA': return 'success';
-          case 'CANCELADA': return 'danger';
-          default: return 'default';
-      }
+  const statusVariant = status => {
+    switch (status) {
+      case 'PROGRAMADA':
+        return 'warning';
+      case 'EN_CURSO':
+        return 'activo';
+      case 'FINALIZADA':
+        return 'success';
+      case 'CANCELADA':
+        return 'danger';
+      default:
+        return 'default';
+    }
   };
 
   return (
@@ -50,30 +55,42 @@ const EvaluationsPage = () => {
           <p className="text-slate-500 text-sm">Calendario de exámenes y simulacros</p>
         </div>
         {user?.rol === 'admin' && (
-            <Button onClick={() => setShowModal(true)}>+ Programar Evaluación</Button>
+          <Button onClick={() => setShowModal(true)}>+ Programar Evaluación</Button>
         )}
       </div>
 
       <Card>
         <Table headers={['Nombre', 'Tipo', 'Fecha', 'Estado']}>
-           {loading ? (
-             <TableRow><TableCell colSpan="4" className="text-center">Cargando...</TableCell></TableRow>
-           ) : evaluations.length === 0 ? (
-             <TableRow><TableCell colSpan="4" className="text-center">No hay evaluaciones programadas</TableCell></TableRow>
-           ) : (
-             evaluations.map(eva => (
-                 <TableRow key={eva.evaluacion_id}>
-                     <TableCell><span className="font-semibold text-slate-800">{eva.nombre}</span></TableCell>
-                     <TableCell>{eva.tipo}</TableCell>
-                     <TableCell>{eva.fecha_programada}</TableCell>
-                     <TableCell><Badge variant={statusVariant(eva.estado)}>{eva.estado}</Badge></TableCell>
-                 </TableRow>
-             ))
-           )}
+          {loading ? (
+            <TableRow>
+              <TableCell colSpan="4" className="text-center">
+                Cargando...
+              </TableCell>
+            </TableRow>
+          ) : evaluations.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan="4" className="text-center">
+                No hay evaluaciones programadas
+              </TableCell>
+            </TableRow>
+          ) : (
+            evaluations.map(eva => (
+              <TableRow key={eva.evaluacion_id}>
+                <TableCell>
+                  <span className="font-semibold text-slate-800">{eva.nombre}</span>
+                </TableCell>
+                <TableCell>{eva.tipo}</TableCell>
+                <TableCell>{eva.fecha_programada}</TableCell>
+                <TableCell>
+                  <Badge variant={statusVariant(eva.estado)}>{eva.estado}</Badge>
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </Table>
       </Card>
 
-      <EvaluationCreateModal 
+      <EvaluationCreateModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onSuccess={fetchEvaluations}

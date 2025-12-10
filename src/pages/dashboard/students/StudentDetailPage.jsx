@@ -17,7 +17,7 @@ const StudentDetailPage = () => {
      * For now, since mockAdapter doesn't support :id params well without regex, we manually mock here or fix adapter
      * Let's implement a simple direct fetch assuming the service handles it or we mock the object directly
      */
-    
+
     // Simulate fetch
     setTimeout(() => {
       setStudent({
@@ -28,18 +28,26 @@ const StudentDetailPage = () => {
         correo: 'juan@email.com',
         modalidad: 'ORDINARIO',
         area: 'A',
-        estado: 'activo'
+        estado: 'activo',
       });
       setLoading(false);
     }, 500);
   }, [id]);
 
-  if (loading) {return <div className="p-8 text-center text-slate-500">Cargando perfil...</div>;}
-  if (!student) {return <div className="p-8 text-center text-red-500">Estudiante no encontrado</div>;}
+  if (loading) {
+    return <div className="p-8 text-center text-slate-500">Cargando perfil...</div>;
+  }
+  if (!student) {
+    return <div className="p-8 text-center text-red-500">Estudiante no encontrado</div>;
+  }
 
   return (
     <div className="space-y-6">
-      <Button variant="ghost" className="mb-4 pl-0" onClick={() => navigate('/dashboard/estudiantes')}>
+      <Button
+        variant="ghost"
+        className="mb-4 pl-0"
+        onClick={() => navigate('/dashboard/estudiantes')}
+      >
         ← Volver a lista
       </Button>
 
@@ -67,7 +75,7 @@ const StudentDetailPage = () => {
                 <span className="block font-medium text-slate-400">Modalidad</span>
                 {student.modalidad}
               </div>
-               <div>
+              <div>
                 <span className="block font-medium text-slate-400">Área</span>
                 {student.area}
               </div>
@@ -82,14 +90,14 @@ const StudentDetailPage = () => {
       {/* Tabs / Sections */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card title="Información Académica">
-            <div className="p-4 text-center text-slate-400 bg-slate-50 rounded-lg border border-dashed border-slate-200">
-                Gráficos de Rendimiento (Próximamente Sprint 6)
-            </div>
+          <div className="p-4 text-center text-slate-400 bg-slate-50 rounded-lg border border-dashed border-slate-200">
+            Gráficos de Rendimiento (Próximamente Sprint 6)
+          </div>
         </Card>
         <Card title="Asistencias Recientes">
-             <div className="p-4 text-center text-slate-400 bg-slate-50 rounded-lg border border-dashed border-slate-200">
-                Resumen de asistencias (Próximamente Sprint 4)
-            </div>
+          <div className="p-4 text-center text-slate-400 bg-slate-50 rounded-lg border border-dashed border-slate-200">
+            Resumen de asistencias (Próximamente Sprint 4)
+          </div>
         </Card>
       </div>
     </div>

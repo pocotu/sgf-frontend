@@ -10,8 +10,8 @@ const AuthLayout = () => {
         <div className="relative z-10 p-12 text-white max-w-xl">
           <h1 className="text-5xl font-bold mb-6 tracking-tight">SGA-P</h1>
           <p className="text-xl text-primary-100 font-light leading-relaxed">
-            Sistema de Gestión Académica para la excelencia preuniversitaria.
-            Gestiona estudiantes, matrículas y rendimiento académico en una sola plataforma.
+            Sistema de Gestión Académica para la excelencia preuniversitaria. Gestiona estudiantes,
+            matrículas y rendimiento académico en una sola plataforma.
           </p>
         </div>
         {/* Decorative Circles */}

@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable max-lines-per-function */
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -121,7 +123,9 @@ const LandingPage = () => {
                       <i className="bi bi-people-fill text-white text-2xl"></i>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-secondary-600">Estudiantes Activos</p>
+                      <p className="text-sm font-semibold text-secondary-600">
+                        Estudiantes Activos
+                      </p>
                       <p className="text-3xl font-black text-primary-700">300+</p>
                     </div>
                   </div>
@@ -130,7 +134,9 @@ const LandingPage = () => {
                       <i className="bi bi-clipboard-data-fill text-white text-2xl"></i>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-secondary-600">Simulacros Semanales</p>
+                      <p className="text-sm font-semibold text-secondary-600">
+                        Simulacros Semanales
+                      </p>
                       <p className="text-3xl font-black text-amber-700">100%</p>
                     </div>
                   </div>
@@ -240,7 +246,9 @@ const LandingPage = () => {
                   <i className={`${feature.icon} ${feature.iconColor} text-3xl`}></i>
                 </div>
                 <h3 className="text-2xl font-bold text-secondary-900 mb-3">{feature.title}</h3>
-                <p className="text-secondary-600 leading-relaxed text-[15px]">{feature.description}</p>
+                <p className="text-secondary-600 leading-relaxed text-[15px]">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
@@ -248,10 +256,7 @@ const LandingPage = () => {
       </section>
 
       {/* Modalidades Section */}
-      <section
-        id="modalidades"
-        className="py-20 bg-gradient-to-br from-brand-cream/30 to-white"
-      >
+      <section id="modalidades" className="py-20 bg-gradient-to-br from-brand-cream/30 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-brand-maroon font-bold tracking-wider uppercase text-sm">
@@ -303,7 +308,9 @@ const LandingPage = () => {
                     {modalidad.badge}
                   </div>
                 )}
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-${modalidad.color}/5 rounded-full -mr-16 -mt-16`}></div>
+                <div
+                  className={`absolute top-0 right-0 w-32 h-32 bg-${modalidad.color}/5 rounded-full -mr-16 -mt-16`}
+                ></div>
                 <div className="relative z-10">
                   <div
                     className={`w-16 h-16 rounded-2xl bg-${modalidad.color === 'brand-gold' ? 'brand-gold-dark' : modalidad.color === 'brand-maroon' ? 'brand-maroon' : 'secondary-700'} text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}

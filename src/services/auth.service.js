@@ -2,7 +2,7 @@ import api from './api';
 
 export const AuthService = {
   async login(dni, password) {
-    const response = await api.post('/auth/login', { dni, password });
+    const response = await api.post('/auth/login', { identifier: dni, password });
     if (response.data.success) {
       localStorage.setItem('token', response.data.data.token);
     }

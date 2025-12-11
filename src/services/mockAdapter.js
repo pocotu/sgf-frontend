@@ -35,6 +35,7 @@ const matchUrl = (url, pattern) => {
   return url.match(regex);
 };
 
+/* eslint-disable complexity */
 export const mockRequest = config => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -398,3 +399,4 @@ export const mockRequest = config => {
     }, 500); // Simulate network latency
   });
 };
+/* eslint-enable complexity */

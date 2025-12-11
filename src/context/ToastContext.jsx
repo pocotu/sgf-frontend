@@ -6,6 +6,7 @@ import {
   InformationCircleIcon,
 } from '@heroicons/react/24/outline';
 
+/* eslint-disable react-refresh/only-export-components */
 const ToastContext = createContext(null);
 
 export const ToastProvider = ({ children }) => {

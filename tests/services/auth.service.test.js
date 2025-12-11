@@ -39,7 +39,7 @@ describe('AuthService', () => {
 
         const result = await AuthService.login('12345678', 'password');
 
-        expect(api.post).toHaveBeenCalledWith('/auth/login', { dni: '12345678', password: 'password' });
+        expect(api.post).toHaveBeenCalledWith('/auth/login', { identifier: '12345678', password: 'password' });
         expect(localStorage.getItem('token')).toBe('fake-jwt-token');
         expect(result).toEqual(mockResponse.data);
     });

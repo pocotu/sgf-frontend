@@ -6,7 +6,7 @@ export const StudentService = {
    * @param {Object} params - { modalidad, area, page, limit }
    */
   async getStudents(params = {}) {
-    const response = await api.get('/estudiantes', { params });
+    const response = await api.get('/students', { params });
     return response.data;
   },
 
@@ -15,7 +15,7 @@ export const StudentService = {
    * @param {number} id
    */
   async getStudentById(id) {
-    const response = await api.get(`/estudiantes/${id}`);
+    const response = await api.get(`/students/${id}`);
     return response.data;
   },
 
@@ -24,7 +24,7 @@ export const StudentService = {
    * @param {Object} data - { usuario_id, modalidad }
    */
   async createStudent(data) {
-    const response = await api.post('/estudiantes', data);
+    const response = await api.post('/students', data);
     return response.data;
   },
 };

@@ -1,89 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", "sans-serif";
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
-  /* Brand Maroon/Burgundy Colors */
-  --color-primary-50: #fdf2f4;
-  --color-primary-100: #fce7eb;
-  --color-primary-200: #f9d0d9;
-  --color-primary-300: #f4a8b8;
-  --color-primary-400: #ed7591;
-  --color-primary-500: #e0476f;
-  --color-primary-600: #c9295a;
-  --color-primary-700: #a8204a;
-  --color-primary-800: #8b1d42;
-  --color-primary-900: #761c3d;
-  --color-primary-950: #420a1e;
+  /* Paleta Marrón Vino + Dorado + Crema */
+  --color-primary-50: #fdf2f2;
+  --color-primary-100: #fce8e8;
+  --color-primary-200: #fad5d5;
+  --color-primary-300: #f8b4b4;
+  --color-primary-400: #f98080;
+  --color-primary-500: #f05252; /* Rojo suave para alerts */
+  --color-primary-600: #e02424;
+  --color-primary-700: #c81e1e;
+  --color-primary-800: #9b1c1c;
+  --color-primary-900: #771d1d;
+  --color-primary-950: #571717;
 
-  --color-secondary-50: #f8fafc;
-  --color-secondary-100: #f1f5f9;
-  --color-secondary-200: #e2e8f0;
-  --color-secondary-300: #cbd5e1;
-  --color-secondary-400: #94a3b8;
-  --color-secondary-500: #64748b;
-  --color-secondary-600: #475569;
-  --color-secondary-700: #334155;
-  --color-secondary-800: #1e293b;
-  --color-secondary-900: #0f172a;
-  --color-secondary-950: #020617;
+  /* Colores principales de la nueva paleta */
+  --color-brand-maroon: #6d001a;
+  --color-brand-maroon-dark: #580015;
+  --color-brand-cream: #f0eada;
+  --color-brand-cream-light: #f5f2e9;
+  --color-brand-cream-dark: #e9e1cd;
+  --color-brand-gold: #c9a42e;
+  --color-brand-gold-light: #e6c45c;
+  --color-brand-gold-dark: #a8841e;
 
-  /* Brand Colors - Academia Theme */
-  --color-brand-maroon: #800020;
-  --color-brand-maroon-dark: #5c0017;
-  --color-brand-maroon-light: #a8204a;
-  --color-brand-gold: #d4af37;
-  --color-brand-gold-dark: #b8941f;
-  --color-brand-gold-light: #e8c968;
-  --color-brand-cream: #f5f5dc;
-  --color-brand-cream-dark: #e8e8d0;
+  /* Neutros ajustados para la paleta */
+  --color-secondary-50: #f8f7f5;
+  --color-secondary-100: #f0eee9;
+  --color-secondary-200: #e6e2d9;
+  --color-secondary-300: #d8d2c3;
+  --color-secondary-400: #c6bda6;
+  --color-secondary-500: #b0a488;
+  --color-secondary-600: #8c8062;
+  --color-secondary-700: #716750;
+  --color-secondary-800: #4a4232;
+  --color-secondary-900: #332d22;
+  --color-secondary-950: #1f1b13;
 
-  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  /* Colores semánticos que combinan con la paleta */
+  --color-success-50: #f0f7f0;
+  --color-success-500: #2e8b57; /* Verde forestal que combina */
+  --color-success-700: #1e5c3a;
 
-  /* Retain glass vars if needed, or define as utilities */
+  --color-warning-50: #fff8e6;
+  --color-warning-500: #d4a017; /* Dorado para warning */
+  --color-warning-700: #a47c10;
+
+  --color-danger-50: #fdf2f2;
+  --color-danger-500: #c53030; /* Rojo vino para danger */
+  --color-danger-700: #9b2c2c;
+
+  --color-info-50: #eff6ff;
+  --color-info-500: #4f46e5; /* Índigo que combina */
+  --color-info-700: #3730a3;
+
+  --shadow-glass: 0 8px 32px 0 rgba(109, 0, 26, 0.15);
 }
 
-/* Custom Utilities using the new @utility directive or just classes */
+/* Custom Utilities */
 :root {
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(109, 0, 26, 0.1);
+  --glass-bg: rgba(245, 242, 233, 0.8);
 }
 
 body {
-  @apply bg-slate-50 text-slate-800 antialiased;
+  @apply bg-brand-cream-light text-secondary-800 antialiased;
   min-height: 100vh;
+  font-family: var(--font-sans);
 }
 
-@utility glass {
-  background: var(--glass-bg);
+/* Background con ángulo como en el ejemplo */
+.bg-angled-maroon {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-angled-maroon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(-5deg, var(--color-brand-maroon) 50%, var(--color-brand-gold) 50.1%);
+  transform: skewY(-5deg);
+  transform-origin: 0;
+  z-index: 0;
+}
+
+@utility glass-maroon {
+  background: rgba(109, 0, 26, 0.05);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border);
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(109, 0, 26, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(109, 0, 26, 0.05);
 }
 
-@utility glass-card {
-  background: rgba(255, 255, 255, 0.7);
+@utility glass-cream {
+  background: rgba(240, 234, 218, 0.7);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(233, 225, 205, 0.5);
+  box-shadow: 0 10px 15px -3px rgba(109, 0, 26, 0.05);
 }
 
-@utility glass-input {
-  @apply bg-white/50 border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all outline-none backdrop-blur-sm;
+@utility glass-input-maroon {
+  @apply bg-white/60 border border-brand-cream-dark focus:border-brand-maroon focus:ring-2 focus:ring-brand-maroon/20 transition-all outline-none;
 }
 
-/* Custom Scrollbar */
+/* Botones con la nueva paleta */
+@utility btn-maroon {
+  @apply bg-brand-maroon hover:bg-brand-maroon-dark text-white font-medium px-4 py-2 rounded-lg transition-colors;
+}
+
+@utility btn-gold {
+  @apply bg-brand-gold hover:bg-brand-gold-dark text-white font-medium px-4 py-2 rounded-lg transition-colors;
+}
+
+@utility btn-outline-maroon {
+  @apply border border-brand-maroon text-brand-maroon hover:bg-brand-maroon hover:text-white font-medium px-4 py-2 rounded-lg transition-colors;
+}
+
+/* Custom Scrollbar que combine */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-transparent;
+  @apply bg-brand-cream;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+  @apply bg-brand-maroon/30 rounded-full hover:bg-brand-maroon/50 transition-colors;
 }

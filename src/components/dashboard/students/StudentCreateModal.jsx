@@ -25,7 +25,7 @@ const StudentCreateModal = ({ isOpen, onClose, onSuccess }) => {
     try {
       const res = await UserService.getUsers(); // Assuming this lists all users
       if (res.success) {
-        setUsers(res.data.usuarios || []);
+        setUsers(res.data || []);
       }
     } catch (error) {
       console.error('Error loading users', error);
@@ -60,7 +60,7 @@ const StudentCreateModal = ({ isOpen, onClose, onSuccess }) => {
     setLoading(true);
     try {
       const response = await StudentService.createStudent({
-        usuario_id: selectedUser.usuario_id,
+        usuarioId: selectedUser.usuarioId,
         modalidad: modality,
       });
 
@@ -120,7 +120,7 @@ const StudentCreateModal = ({ isOpen, onClose, onSuccess }) => {
               ) : (
                 filteredUsers.map(user => (
                   <div
-                    key={user.usuario_id}
+                    key={user.usuarioId}
                     className="p-2 border-b last:border-0 hover:bg-slate-50 cursor-pointer text-sm"
                     onClick={() => setSelectedUser(user)}
                   >

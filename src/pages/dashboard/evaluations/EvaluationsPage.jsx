@@ -75,12 +75,18 @@ const EvaluationsPage = () => {
             </TableRow>
           ) : (
             evaluations.map(eva => (
-              <TableRow key={eva.evaluacion_id}>
+              <TableRow key={eva.evaluacionId}>
                 <TableCell>
-                  <span className="font-semibold text-slate-800">{eva.nombre}</span>
+                  <span className="font-semibold text-slate-800">{eva.descripcion}</span>
                 </TableCell>
-                <TableCell>{eva.tipo}</TableCell>
-                <TableCell>{eva.fecha_programada}</TableCell>
+                <TableCell>
+                  {eva.grupo?.nombreGrupo} - Área {eva.grupo?.area}
+                </TableCell>
+                <TableCell>
+                  {eva.fechaEvaluacion
+                    ? new Date(eva.fechaEvaluacion).toLocaleDateString('es-PE')
+                    : '-'}
+                </TableCell>
                 <TableCell>
                   <Badge variant={statusVariant(eva.estado)}>{eva.estado}</Badge>
                 </TableCell>

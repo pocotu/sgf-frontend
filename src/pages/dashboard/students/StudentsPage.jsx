@@ -78,7 +78,7 @@ const StudentsPage = () => {
   // Stats para mostrar
   const stats = {
     total: students.length,
-    activos: students.filter(s => s.estado === 'activo').length,
+    activos: students.filter(s => s.usuario?.estado === 'activo').length,
     ordinarios: students.filter(s => s.modalidad === 'ORDINARIO').length,
     primeraOpcion: students.filter(s => s.modalidad === 'PRIMERA_OPCION').length,
   };
@@ -239,32 +239,32 @@ const StudentsPage = () => {
                 const modalityColor = getModalityColor(student.modalidad);
                 return (
                   <TableRow
-                    key={student.estudiante_id}
+                    key={student.estudianteId}
                     className="hover:bg-brand-cream-light transition-colors group"
-                    onClick={() => navigate(`/dashboard/estudiantes/${student.estudiante_id}`)}
+                    onClick={() => navigate(`/dashboard/estudiantes/${student.estudianteId}`)}
                   >
                     <TableCell>
                       <div className="font-mono font-semibold text-secondary-700 bg-brand-cream px-3 py-1.5 rounded-lg inline-block">
-                        {student.codigo_interno}
+                        {student.codigoInterno}
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-maroon/10 to-brand-maroon/5 flex items-center justify-center text-brand-maroon font-semibold">
-                          {student.nombre_completo?.[0]?.toUpperCase() || 'E'}
+                          {student.nombreCompleto?.[0]?.toUpperCase() || 'E'}
                         </div>
                         <div>
                           <p className="font-semibold text-secondary-900 group-hover:text-brand-maroon transition-colors">
-                            {student.nombre_completo}
+                            {student.nombreCompleto}
                           </p>
                           <p className="text-xs text-secondary-500">
-                            {student.email || 'Sin email'}
+                            {student.usuario?.correo || 'Sin email'}
                           </p>
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <span className="font-medium text-secondary-700">{student.dni}</span>
+                      <span className="font-medium text-secondary-700">{student.usuario?.dni}</span>
                     </TableCell>
                     <TableCell>
                       <span
@@ -276,12 +276,12 @@ const StudentsPage = () => {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <div
-                          className={`w-2 h-2 rounded-full ${student.estado === 'activo' ? 'bg-success-500' : 'bg-secondary-300'}`}
+                          className={`w-2 h-2 rounded-full ${student.usuario?.estado === 'activo' ? 'bg-success-500' : 'bg-secondary-300'}`}
                         ></div>
                         <span
-                          className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium ${student.estado === 'activo' ? 'bg-success-50 text-success-700 border border-success-100' : 'bg-secondary-100 text-secondary-700 border border-secondary-200'}`}
+                          className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium ${student.usuario?.estado === 'activo' ? 'bg-success-50 text-success-700 border border-success-100' : 'bg-secondary-100 text-secondary-700 border border-secondary-200'}`}
                         >
-                          {student.estado === 'activo' ? 'Activo' : 'Inactivo'}
+                          {student.usuario?.estado === 'activo' ? 'Activo' : 'Inactivo'}
                         </span>
                       </div>
                     </TableCell>
@@ -290,7 +290,7 @@ const StudentsPage = () => {
                         className="px-4 py-2 text-sm font-medium text-brand-maroon bg-brand-maroon/10 hover:bg-brand-maroon/20 rounded-lg transition-colors"
                         onClick={e => {
                           e.stopPropagation();
-                          navigate(`/dashboard/estudiantes/${student.estudiante_id}`);
+                          navigate(`/dashboard/estudiantes/${student.estudianteId}`);
                         }}
                       >
                         Ver detalles

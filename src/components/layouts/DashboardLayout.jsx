@@ -72,7 +72,7 @@ const DashboardLayout = () => {
               <span className="text-white font-bold text-xl">S</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">SGA-P</h1>
+              <h1 className="text-2xl font-bold text-white tracking-tight">Lumen</h1>
               <p className="text-xs text-brand-cream/70 mt-0.5">Sistema de Gestión Académica</p>
             </div>
           </div>
@@ -185,7 +185,7 @@ const DashboardLayout = () => {
           {/* Footer */}
           <footer className="mt-8 text-center">
             <p className="text-sm text-secondary-600">
-              © {new Date().getFullYear()} SGA-P • Sistema de Gestión Académica
+              © {new Date().getFullYear()} Lumen • Sistema de Gestión Académica
             </p>
             <p className="text-xs text-secondary-500/80 mt-1">
               Universidad • {user?.rol ? `Rol: ${user.rol}` : ''}

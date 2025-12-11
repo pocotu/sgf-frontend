@@ -310,7 +310,7 @@ const StudentsPage = () => {
               Mostrando <span className="font-semibold text-secondary-700">{students.length}</span>{' '}
               estudiantes
             </div>
-            <div className="text-xs text-secondary-400">SGA-P • Sistema de Gestión Académica</div>
+            <div className="text-xs text-secondary-400">Lumen • Sistema de Gestión Académica</div>
           </div>
         )}
       </Card>

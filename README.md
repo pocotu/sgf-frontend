@@ -35,7 +35,7 @@ sgf-frontend/
 │   │   ├── financial/       # Páginas financiero
 │   │   └── communications/  # Páginas comunicaciones
 │   │
-│   ├── hooks/               # Custom Hooks específicos SGA-P
+│   ├── hooks/               # Custom Hooks específicos Lumen
 │   ├── services/            # Servicios API y comunicación backend
 │   ├── store/               # Jotai Atoms (estado global)
 │   │   └── atoms/           # Definición de atoms

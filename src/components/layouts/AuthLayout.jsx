@@ -8,7 +8,7 @@ const AuthLayout = () => {
       <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-primary-900 to-primary-700 relative overflow-hidden items-center justify-center">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-20"></div>
         <div className="relative z-10 p-12 text-white max-w-xl">
-          <h1 className="text-5xl font-bold mb-6 tracking-tight">SGA-P</h1>
+          <h1 className="text-5xl font-bold mb-6 tracking-tight">Lumen</h1>
           <p className="text-xl text-primary-100 font-light leading-relaxed">
             Sistema de Gestión Académica para la excelencia preuniversitaria. Gestiona estudiantes,
             matrículas y rendimiento académico en una sola plataforma.
@@ -24,7 +24,7 @@ const AuthLayout = () => {
         <div className="w-full max-w-md animate-fade-in-up">
           <Outlet />
           <p className="mt-8 text-center text-sm text-slate-400">
-            &copy; {new Date().getFullYear()} SGA-P. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} Lumen. Todos los derechos reservados.
           </p>
         </div>
       </div>

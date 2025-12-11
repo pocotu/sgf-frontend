@@ -42,7 +42,7 @@ const DashboardLayout = () => {
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col fixed h-full z-10">
         <div className="p-6 border-b border-slate-100">
-          <h1 className="text-2xl font-bold text-primary-700 tracking-tight">SGA-P</h1>
+          <h1 className="text-2xl font-bold text-primary-700 tracking-tight">Lumen</h1>
           <p className="text-xs text-slate-400 mt-1">Panel de Control</p>
         </div>
 

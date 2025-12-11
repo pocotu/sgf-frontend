@@ -3,17 +3,18 @@
 @theme {
   --font-sans: "Inter", "sans-serif";
 
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-primary-800: #1e40af;
-  --color-primary-900: #1e3a8a;
-  --color-primary-950: #172554;
+  /* Brand Maroon/Burgundy Colors */
+  --color-primary-50: #fdf2f4;
+  --color-primary-100: #fce7eb;
+  --color-primary-200: #f9d0d9;
+  --color-primary-300: #f4a8b8;
+  --color-primary-400: #ed7591;
+  --color-primary-500: #e0476f;
+  --color-primary-600: #c9295a;
+  --color-primary-700: #a8204a;
+  --color-primary-800: #8b1d42;
+  --color-primary-900: #761c3d;
+  --color-primary-950: #420a1e;
 
   --color-secondary-50: #f8fafc;
   --color-secondary-100: #f1f5f9;
@@ -26,6 +27,16 @@
   --color-secondary-800: #1e293b;
   --color-secondary-900: #0f172a;
   --color-secondary-950: #020617;
+
+  /* Brand Colors - Academia Theme */
+  --color-brand-maroon: #800020;
+  --color-brand-maroon-dark: #5c0017;
+  --color-brand-maroon-light: #a8204a;
+  --color-brand-gold: #d4af37;
+  --color-brand-gold-dark: #b8941f;
+  --color-brand-gold-light: #e8c968;
+  --color-brand-cream: #f5f5dc;
+  --color-brand-cream-dark: #e8e8d0;
 
   --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 

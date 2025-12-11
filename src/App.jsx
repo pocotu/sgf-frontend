@@ -7,6 +7,7 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 
 import AuthLayout from './components/layouts/AuthLayout';
 import DashboardLayout from './components/layouts/DashboardLayout';
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/auth/LoginPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import UsersPage from './pages/dashboard/users/UsersPage';
@@ -39,8 +40,8 @@ function App() {
         <BrowserRouter>
           <ErrorBoundary>
             <Routes>
-              {/* Redirect root to dashboard (which helps check auth) or login */}
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              {/* Landing Page */}
+              <Route path="/" element={<LandingPage />} />
 
               {/* Auth Routes */}
               <Route path="/auth" element={<AuthLayout />}>

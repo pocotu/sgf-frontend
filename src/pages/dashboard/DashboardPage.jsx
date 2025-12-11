@@ -24,7 +24,7 @@ const DashboardPage = () => {
       // Fallback for unknown roles
       return (
         <div className="text-center py-20">
-          <h2 className="text-2xl font-bold text-slate-800">Bienvenido al SGA-P</h2>
+          <h2 className="text-2xl font-bold text-slate-800">Bienvenido a Lumen</h2>
           <p className="text-slate-500">Tu rol no tiene un panel asignado.</p>
         </div>
       );

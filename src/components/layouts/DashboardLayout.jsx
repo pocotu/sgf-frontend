@@ -13,7 +13,6 @@ import {
   ClipboardDocumentListIcon,
   CalendarDaysIcon,
   ArrowRightOnRectangleIcon,
-  Cog6ToothIcon,
   ChartBarIcon,
   DocumentChartBarIcon,
 } from '@heroicons/react/24/outline';
@@ -32,12 +31,32 @@ const DashboardLayout = () => {
   const navItems = [
     { name: 'Inicio', path: '/dashboard', icon: HomeIcon },
     { name: 'Usuarios', path: '/dashboard/usuarios', icon: UserGroupIcon, roles: ['admin'] },
-    { name: 'Estudiantes', path: '/dashboard/estudiantes', icon: AcademicCapIcon, roles: ['admin', 'docente'] },
+    {
+      name: 'Estudiantes',
+      path: '/dashboard/estudiantes',
+      icon: AcademicCapIcon,
+      roles: ['admin', 'docente'],
+    },
     { name: 'Cursos', path: '/dashboard/cursos', icon: BookOpenIcon },
-    { name: 'Grupos', path: '/dashboard/grupos', icon: BuildingOfficeIcon, roles: ['admin', 'docente'] },
+    {
+      name: 'Grupos',
+      path: '/dashboard/grupos',
+      icon: BuildingOfficeIcon,
+      roles: ['admin', 'docente'],
+    },
     { name: 'Evaluaciones', path: '/dashboard/evaluaciones', icon: DocumentTextIcon },
-    { name: 'Registrar Notas', path: '/dashboard/notas', icon: ClipboardDocumentListIcon, roles: ['admin', 'docente'] },
-    { name: 'Mis Asistencias', path: '/dashboard/mis-asistencias', icon: CalendarDaysIcon, roles: ['estudiante'] },
+    {
+      name: 'Registrar Notas',
+      path: '/dashboard/notas',
+      icon: ClipboardDocumentListIcon,
+      roles: ['admin', 'docente'],
+    },
+    {
+      name: 'Mis Asistencias',
+      path: '/dashboard/mis-asistencias',
+      icon: CalendarDaysIcon,
+      roles: ['estudiante'],
+    },
     { name: 'Rankings', path: '/dashboard/rankings', icon: ChartBarIcon },
     { name: 'Reportes', path: '/dashboard/reportes', icon: DocumentChartBarIcon },
   ];
@@ -84,9 +103,11 @@ const DashboardLayout = () => {
                     }
                   `}
                 >
-                  <Icon className={`w-5 h-5 transition-transform group-hover:scale-110 ${
-                    'text-brand-cream/60' // Quité la referencia a isActive aquí
-                  }`} />
+                  <Icon
+                    className={`w-5 h-5 transition-transform group-hover:scale-110 ${
+                      'text-brand-cream/60' // Quité la referencia a isActive aquí
+                    }`}
+                  />
                   <span className="font-medium">{item.name}</span>
                 </NavLink>
               );
@@ -107,12 +128,13 @@ const DashboardLayout = () => {
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-white truncate">{user?.nombres}</p>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-medium text-brand-cream/80 capitalize">{user?.rol}</span>
+                <span className="text-xs font-medium text-brand-cream/80 capitalize">
+                  {user?.rol}
+                </span>
                 <span className="w-1 h-1 bg-brand-cream/40 rounded-full"></span>
                 <span className="text-xs text-brand-cream/60">En línea</span>
               </div>
             </div>
-            <Cog6ToothIcon className="w-5 h-5 text-brand-cream/50 hover:text-white cursor-pointer transition-colors" />
           </div>
 
           <button
@@ -135,7 +157,8 @@ const DashboardLayout = () => {
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-white">Panel de Control</h1>
                 <p className="text-brand-cream mt-1">
-                  Bienvenido de nuevo, <span className="font-semibold">{user?.nombres?.split(' ')[0] || 'Usuario'}</span>
+                  Bienvenido de nuevo,{' '}
+                  <span className="font-semibold">{user?.nombres?.split(' ')[0] || 'Usuario'}</span>
                 </p>
               </div>
               <div className="hidden md:block">

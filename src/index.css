@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -44,15 +44,15 @@
   --color-success-50: #f0f7f0;
   --color-success-500: #2e8b57; /* Verde forestal que combina */
   --color-success-700: #1e5c3a;
-  
+
   --color-warning-50: #fff8e6;
   --color-warning-500: #d4a017; /* Dorado para warning */
   --color-warning-700: #a47c10;
-  
+
   --color-danger-50: #fdf2f2;
   --color-danger-500: #c53030; /* Rojo vino para danger */
   --color-danger-700: #9b2c2c;
-  
+
   --color-info-50: #eff6ff;
   --color-info-500: #4f46e5; /* Índigo que combina */
   --color-info-700: #3730a3;
@@ -79,7 +79,7 @@ body {
 }
 
 .bg-angled-maroon::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;

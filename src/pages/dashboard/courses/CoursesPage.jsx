@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 import { userAtom } from '../../../store/auth.store';
-import { useToast } from '../../../context/ToastContext';
 import { CourseService } from '../../../services/course.service';
 import Card from '../../../components/ui/Card';
 import Button from '../../../components/ui/Button';

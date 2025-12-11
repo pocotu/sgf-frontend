@@ -44,11 +44,23 @@ const StudentsPage = () => {
   const getModalityColor = mod => {
     switch (mod) {
       case 'ORDINARIO':
-        return { bg: 'bg-brand-maroon/10', text: 'text-brand-maroon', border: 'border-brand-maroon/20' };
+        return {
+          bg: 'bg-brand-maroon/10',
+          text: 'text-brand-maroon',
+          border: 'border-brand-maroon/20',
+        };
       case 'PRIMERA_OPCION':
-        return { bg: 'bg-brand-gold/10', text: 'text-brand-gold-dark', border: 'border-brand-gold/20' };
+        return {
+          bg: 'bg-brand-gold/10',
+          text: 'text-brand-gold-dark',
+          border: 'border-brand-gold/20',
+        };
       case 'DIRIMENCIA':
-        return { bg: 'bg-secondary-100', text: 'text-secondary-700', border: 'border-secondary-200' };
+        return {
+          bg: 'bg-secondary-100',
+          text: 'text-secondary-700',
+          border: 'border-secondary-200',
+        };
       default:
         return { bg: 'bg-gray-100', text: 'text-gray-700', border: 'border-gray-200' };
     }
@@ -56,9 +68,9 @@ const StudentsPage = () => {
 
   const formatModalidad = mod => {
     const map = {
-      'ORDINARIO': 'Ordinario',
-      'PRIMERA_OPCION': 'Primera Opción',
-      'DIRIMENCIA': 'Dirimencia'
+      ORDINARIO: 'Ordinario',
+      PRIMERA_OPCION: 'Primera Opción',
+      DIRIMENCIA: 'Dirimencia',
     };
     return map[mod] || mod;
   };
@@ -68,7 +80,7 @@ const StudentsPage = () => {
     total: students.length,
     activos: students.filter(s => s.estado === 'activo').length,
     ordinarios: students.filter(s => s.modalidad === 'ORDINARIO').length,
-    primeraOpcion: students.filter(s => s.modalidad === 'PRIMERA_OPCION').length
+    primeraOpcion: students.filter(s => s.modalidad === 'PRIMERA_OPCION').length,
   };
 
   return (
@@ -82,12 +94,16 @@ const StudentsPage = () => {
                 <UserGroupIcon className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-secondary-900">Gestión de Estudiantes</h1>
-                <p className="text-secondary-600 text-sm md:text-base">Directorio completo de alumnos matriculados</p>
+                <h1 className="text-2xl md:text-3xl font-bold text-secondary-900">
+                  Gestión de Estudiantes
+                </h1>
+                <p className="text-secondary-600 text-sm md:text-base">
+                  Directorio completo de alumnos matriculados
+                </p>
               </div>
             </div>
           </div>
-          <Button 
+          <Button
             onClick={() => setShowModal(true)}
             className="bg-gradient-to-r from-brand-maroon to-brand-maroon-dark hover:from-brand-maroon-dark hover:to-brand-maroon border-0 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-3 rounded-xl flex items-center gap-2 font-medium"
           >
@@ -157,7 +173,7 @@ const StudentsPage = () => {
               onChange={e => setFilters({ ...filters, search: e.target.value })}
             />
           </div>
-          
+
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
               <FunnelIcon className="w-4 h-4 text-secondary-500" />
@@ -208,7 +224,9 @@ const StudentsPage = () => {
                       <UserGroupIcon className="w-8 h-8 text-secondary-400" />
                     </div>
                     <div>
-                      <p className="text-secondary-700 font-medium">No hay estudiantes registrados</p>
+                      <p className="text-secondary-700 font-medium">
+                        No hay estudiantes registrados
+                      </p>
                       <p className="text-secondary-500 text-sm mt-1">
                         Comienza registrando el primer estudiante
                       </p>
@@ -239,7 +257,9 @@ const StudentsPage = () => {
                           <p className="font-semibold text-secondary-900 group-hover:text-brand-maroon transition-colors">
                             {student.nombre_completo}
                           </p>
-                          <p className="text-xs text-secondary-500">{student.email || 'Sin email'}</p>
+                          <p className="text-xs text-secondary-500">
+                            {student.email || 'Sin email'}
+                          </p>
                         </div>
                       </div>
                     </TableCell>
@@ -247,22 +267,28 @@ const StudentsPage = () => {
                       <span className="font-medium text-secondary-700">{student.dni}</span>
                     </TableCell>
                     <TableCell>
-                      <span className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium ${modalityColor.bg} ${modalityColor.text} border ${modalityColor.border}`}>
+                      <span
+                        className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium ${modalityColor.bg} ${modalityColor.text} border ${modalityColor.border}`}
+                      >
                         {formatModalidad(student.modalidad)}
                       </span>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <div className={`w-2 h-2 rounded-full ${student.estado === 'activo' ? 'bg-success-500' : 'bg-secondary-300'}`}></div>
-                        <span className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium ${student.estado === 'activo' ? 'bg-success-50 text-success-700 border border-success-100' : 'bg-secondary-100 text-secondary-700 border border-secondary-200'}`}>
+                        <div
+                          className={`w-2 h-2 rounded-full ${student.estado === 'activo' ? 'bg-success-500' : 'bg-secondary-300'}`}
+                        ></div>
+                        <span
+                          className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium ${student.estado === 'activo' ? 'bg-success-50 text-success-700 border border-success-100' : 'bg-secondary-100 text-secondary-700 border border-secondary-200'}`}
+                        >
                           {student.estado === 'activo' ? 'Activo' : 'Inactivo'}
                         </span>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <button 
+                      <button
                         className="px-4 py-2 text-sm font-medium text-brand-maroon bg-brand-maroon/10 hover:bg-brand-maroon/20 rounded-lg transition-colors"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           navigate(`/dashboard/estudiantes/${student.estudiante_id}`);
                         }}
@@ -281,11 +307,10 @@ const StudentsPage = () => {
         {!loading && students.length > 0 && (
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-brand-cream-dark">
             <div className="text-sm text-secondary-500">
-              Mostrando <span className="font-semibold text-secondary-700">{students.length}</span> estudiantes
+              Mostrando <span className="font-semibold text-secondary-700">{students.length}</span>{' '}
+              estudiantes
             </div>
-            <div className="text-xs text-secondary-400">
-              SGA-P • Sistema de Gestión Académica
-            </div>
+            <div className="text-xs text-secondary-400">SGA-P • Sistema de Gestión Académica</div>
           </div>
         )}
       </Card>

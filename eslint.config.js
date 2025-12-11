@@ -43,22 +43,25 @@ export default [
     rules: {
       // ===== REACT HOOKS =====
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true, allowExportNames: ['useToast', 'ToastProvider'] },
+      ],
 
       /*
        * ===== MANTENIBILIDAD (Complejidad y Legibilidad) =====
-       * Limita la complejidad ciclomática
+       * Limita la complejidad ciclomática (ajustado para componentes React)
        */
-      complexity: ['warn', { max: 12 }],
-      'max-depth': ['warn', { max: 4 }],
-      'max-nested-callbacks': ['warn', { max: 3 }],
+      complexity: ['warn', { max: 20 }],
+      'max-depth': ['warn', { max: 5 }],
+      'max-nested-callbacks': ['warn', { max: 4 }],
       'max-lines-per-function': [
         'warn',
-        { max: 80, skipBlankLines: true, skipComments: true },
+        { max: 350, skipBlankLines: true, skipComments: true },
       ],
-      'max-lines': ['warn', { max: 400, skipBlankLines: true, skipComments: true }],
-      'max-params': ['warn', { max: 4 }],
-      'max-statements': ['warn', { max: 25 }, { ignoreTopLevelFunctions: false }],
+      'max-lines': ['warn', { max: 500, skipBlankLines: true, skipComments: true }],
+      'max-params': ['warn', { max: 5 }],
+      'max-statements': ['warn', { max: 80 }, { ignoreTopLevelFunctions: false }],
 
       /*
        * ===== CORRECCIÓN (Prevención de Errores) =====

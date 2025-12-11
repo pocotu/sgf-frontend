@@ -6,7 +6,7 @@ export const CourseService = {
    * @param {Object} params - { area }
    */
   async getCourses(params = {}) {
-    const response = await api.get('/cursos', { params });
+    const response = await api.get('/courses', { params });
     return response.data;
   },
 
@@ -15,12 +15,12 @@ export const CourseService = {
    * @param {Object} data - { nombre, area, descripcion }
    */
   async createCourse(data) {
-    const response = await api.post('/cursos', data);
+    const response = await api.post('/courses', data);
     return response.data;
   },
 
   async getCourseById(id) {
-    const response = await api.get(`/cursos/${id}`);
+    const response = await api.get(`/courses/${id}`);
     return response.data;
   },
 };

@@ -25,15 +25,7 @@ const StudentGradesPage = () => {
          */
         const response = await EnrollmentService.getEnrollments({ estudiante_id: user.id });
         if (response.success) {
-          setEnrollments(
-            response.data.map(enr => ({
-              ...enr,
-              // Mocking grades for visualization if not present
-              parcial: Math.floor(Math.random() * 20),
-              final: Math.floor(Math.random() * 20),
-              promedio: 0, // calc below
-            })),
-          );
+          setEnrollments(response.data || []);
         }
       } catch (error) {
         console.error(error);
@@ -69,26 +61,40 @@ const StudentGradesPage = () => {
               </TableCell>
             </TableRow>
           ) : (
-            enrollments.map((course, idx) => {
-              const avg = calculateAverage(course.parcial, course.final);
-              const status = avg >= 11 ? 'APROBADO' : 'DESAPROBADO';
+            enrollments.map((enrollment, idx) => {
+              const parcial = enrollment.parcial || 0;
+              const final = enrollment.final || 0;
+              const avg = parcial && final ? calculateAverage(parcial, final) : 0;
+              const status = avg >= 11 ? 'APROBADO' : avg > 0 ? 'DESAPROBADO' : 'PENDIENTE';
               return (
                 <TableRow key={idx}>
                   <TableCell>
                     <span className="font-semibold text-slate-700">
-                      {course.nombre_curso || `Curso ${idx + 1}`}
+                      {enrollment.grupo?.nombreGrupo || `Grupo ${idx + 1}`}
                     </span>
                   </TableCell>
-                  <TableCell>3.0</TableCell>
-                  <TableCell>{course.parcial}</TableCell>
-                  <TableCell>{course.final}</TableCell>
+                  <TableCell>-</TableCell>
+                  <TableCell>{parcial || '-'}</TableCell>
+                  <TableCell>{final || '-'}</TableCell>
                   <TableCell>
-                    <span className={`font-bold ${avg >= 11 ? 'text-blue-600' : 'text-red-500'}`}>
-                      {avg}
+                    <span
+                      className={`font-bold ${avg >= 11 ? 'text-blue-600' : avg > 0 ? 'text-red-500' : 'text-slate-400'}`}
+                    >
+                      {avg || '-'}
                     </span>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={status === 'APROBADO' ? 'success' : 'danger'}>{status}</Badge>
+                    <Badge
+                      variant={
+                        status === 'APROBADO'
+                          ? 'success'
+                          : status === 'DESAPROBADO'
+                            ? 'danger'
+                            : 'warning'
+                      }
+                    >
+                      {status}
+                    </Badge>
                   </TableCell>
                 </TableRow>
               );
@@ -98,18 +104,10 @@ const StudentGradesPage = () => {
       </Card>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card
-          title="Promedio Ponderado"
-          className="bg-gradient-to-br from-primary-600 to-primary-800 text-white"
-        >
-          <div className="text-4xl font-bold text-center py-4">15.4</div>
-          <p className="text-center text-primary-100 text-sm">Orden de Mérito: 5to Superior</p>
-        </Card>
-        <Card title="Créditos Aprobados">
-          <div className="text-4xl font-bold text-center text-slate-700 py-4">18 / 22</div>
-        </Card>
-        <Card title="Asistencia General">
-          <div className="text-4xl font-bold text-center text-emerald-600 py-4">92%</div>
+        <Card title="Información">
+          <div className="text-center py-8 text-slate-500">
+            <p className="text-sm">Las notas se mostrarán cuando estén disponibles en el sistema</p>
+          </div>
         </Card>
       </div>
     </div>

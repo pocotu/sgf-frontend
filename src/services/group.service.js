@@ -15,7 +15,7 @@ export const GroupService = {
       delete cleanParams.area;
     }
 
-    const response = await api.get('/grupos', { params: cleanParams });
+    const response = await api.get('/groups', { params: cleanParams });
     return response.data;
   },
 
@@ -24,12 +24,12 @@ export const GroupService = {
    * @param {number} id
    */
   async getGroupById(id) {
-    const response = await api.get(`/grupos/${id}`);
+    const response = await api.get(`/groups/${id}`);
     return response.data;
   },
 
   async createGroup(data) {
-    const response = await api.post('/grupos', data);
+    const response = await api.post('/groups', data);
     return response.data;
   },
 };

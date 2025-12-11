@@ -12,26 +12,30 @@ const StudentAttendancePage = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchData = async estudianteId => {
+    if (!estudianteId) {
+      return;
+    }
+
     setLoading(true);
     try {
-      // Mock: Get summary
-      const response = await AttendanceService.getStudentAttendanceSummary(1); // Hardcoded ID 1 for mock student 'Juan Perez'
+      const response = await AttendanceService.getStudentAttendanceSummary(estudianteId);
       if (response.success) {
         setSummary(response.data.summary);
-        setHistory(response.data.history);
+        setHistory(response.data.history || []);
       }
     } catch (error) {
       console.error('Error fetching attendance', error);
+      setSummary({ presentes: 0, tardanzas: 0, ausencias: 0, percentage: '0%' });
+      setHistory([]);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (user) {
-      fetchData(user.usuario_id); // Assuming usuario_id maps to student_id roughly or we look it up. In real app, /me/attendance is better.
-      // For mock, let's assume mapping logic is handled or we pass ID 1 for test if user.rol is student
+    if (user?.usuarioId) {
+      fetchData(user.usuarioId);
     }
   }, [user]);
 

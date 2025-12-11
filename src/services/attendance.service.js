@@ -6,7 +6,7 @@ export const AttendanceService = {
    * @param {Object} params - { grupo_id, fecha_desde, fecha_hasta, estudiante_id }
    */
   async getAttendance(params = {}) {
-    const response = await api.get('/asistencias', { params });
+    const response = await api.get('/attendances', { params });
     return response.data;
   },
 
@@ -15,7 +15,7 @@ export const AttendanceService = {
    * @param {Object} data - { grupo_id, fecha_clase, asistencias: [{estudiante_id, estado}, ...] }
    */
   async registerAttendance(data) {
-    const response = await api.post('/asistencias', data);
+    const response = await api.post('/attendances', data);
     return response.data;
   },
 
@@ -23,7 +23,7 @@ export const AttendanceService = {
    * Obtener resumen de asistencia de un estudiante
    */
   async getStudentAttendanceSummary(estudianteId) {
-    const response = await api.get(`/asistencias/estudiante/${estudianteId}/resumen`);
+    const response = await api.get(`/attendances/student/${estudianteId}/summary`);
     return response.data;
   },
 };

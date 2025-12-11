@@ -11,7 +11,7 @@ export const GradeService = {
    * Let's assume for this sprint: Simple grading (One grade per student per evaluation/course context).
    */
   async registerGrades(data) {
-    const response = await api.post('/notas', data);
+    const response = await api.post('/grades', data);
     return response.data;
   },
 
@@ -20,7 +20,7 @@ export const GradeService = {
    * params: { evaluacion_id, estudiante_id, grupo_id }
    */
   async getGrades(params = {}) {
-    const response = await api.get('/notas', { params });
+    const response = await api.get('/grades', { params });
     return response.data;
   },
 };

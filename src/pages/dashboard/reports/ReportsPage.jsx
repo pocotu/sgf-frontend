@@ -6,14 +6,14 @@ import Input from '../../../components/ui/Input';
 
 const ReportsPage = () => {
   const { addToast } = useToast();
-  const [mockGenerating, setMockGenerating] = useState(false);
+  const [generating, setGenerating] = useState(false);
 
   const handleGenerate = type => {
-    setMockGenerating(true);
+    setGenerating(true);
     setTimeout(() => {
-      setMockGenerating(false);
-      addToast(`Reporte ${type} generado correctamente (Simulado)`, 'success');
-    }, 1500);
+      setGenerating(false);
+      addToast(`Funcionalidad de ${type} en desarrollo`, 'info');
+    }, 500);
   };
 
   return (
@@ -33,7 +33,7 @@ const ReportsPage = () => {
             <Button
               className="w-full"
               onClick={() => handleGenerate('Historial de Notas')}
-              loading={mockGenerating}
+              loading={generating}
             >
               Descargar PDF
             </Button>
@@ -54,7 +54,7 @@ const ReportsPage = () => {
               variant="outline"
               className="w-full"
               onClick={() => handleGenerate('Acta Oficial')}
-              loading={mockGenerating}
+              loading={generating}
             >
               Generar Acta
             </Button>
@@ -74,7 +74,7 @@ const ReportsPage = () => {
               variant="secondary"
               className="w-full"
               onClick={() => handleGenerate('Resumen Matrícula')}
-              loading={mockGenerating}
+              loading={generating}
             >
               Exportar Excel
             </Button>

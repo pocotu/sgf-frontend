@@ -17,7 +17,7 @@ const UsersPage = () => {
     try {
       const response = await UserService.getUsers();
       if (response.success) {
-        setUsers(response.data.usuarios);
+        setUsers(response.data);
       }
     } catch (error) {
       console.error(error);

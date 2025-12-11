@@ -6,7 +6,7 @@ export const EnrollmentService = {
    * @param {Object} params - { grupo_id, estudiante_id, estado }
    */
   async getEnrollments(params = {}) {
-    const response = await api.get('/matriculas', { params });
+    const response = await api.get('/enrollments', { params });
     return response.data;
   },
 
@@ -15,7 +15,7 @@ export const EnrollmentService = {
    * @param {Object} data - { estudiante_id, grupo_id, monto_pagado }
    */
   async createEnrollment(data) {
-    const response = await api.post('/matriculas', data);
+    const response = await api.post('/enrollments', data);
     return response.data;
   },
 };

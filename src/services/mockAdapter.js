@@ -1,7 +1,7 @@
 // Mock Data and Logic
 const USERS = [
   {
-    usuario_id: 1,
+    usuarioId: 1,
     dni: '12345678',
     nombres: 'Juan',
     apellidos: 'Pérez',
@@ -10,7 +10,7 @@ const USERS = [
     password: 'password123',
   },
   {
-    usuario_id: 2,
+    usuarioId: 2,
     dni: '87654321',
     nombres: 'María',
     apellidos: 'García',
@@ -19,7 +19,7 @@ const USERS = [
     password: 'admin',
   },
   {
-    usuario_id: 3,
+    usuarioId: 3,
     dni: '11223344',
     nombres: 'Roberto',
     apellidos: 'Gómez',

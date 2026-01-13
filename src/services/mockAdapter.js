@@ -1,33 +1,139 @@
-// Mock Data and Logic
+// ============================================
+// MOCK DATA - ENTREGA 3 COMPLETA
+// ============================================
+
+// USUARIOS (50+ usuarios con datos realistas)
 const USERS = [
+  // ADMINISTRADORES
   {
     usuarioId: 1,
     dni: '12345678',
-    nombres: 'Juan',
-    apellidos: 'Pérez',
-    rol: 'estudiante',
-    correo: 'juan@email.com',
+    nombres: 'Administrador',
+    apellidos: 'Admin',
+    rol: 'admin',
+    correo: 'admin@lumen.edu.pe',
     password: 'password123',
+    requiereCambioPassword: false,
   },
   {
     usuarioId: 2,
-    dni: '87654321',
-    nombres: 'María',
-    apellidos: 'García',
+    dni: '23456789',
+    nombres: 'Carlos',
+    apellidos: 'Mendoza',
     rol: 'admin',
-    correo: 'admin@email.com',
-    password: 'admin',
+    correo: 'cmendoza@lumen.edu.pe',
+    password: 'password123',
+    requiereCambioPassword: false,
   },
+  
+  // DOCENTES
   {
     usuarioId: 3,
-    dni: '11223344',
+    dni: '34567890',
     nombres: 'Roberto',
     apellidos: 'Gómez',
     rol: 'docente',
-    correo: 'profe@email.com',
-    password: 'profe',
+    correo: 'rgomez@lumen.edu.pe',
+    password: 'password123',
+    requiereCambioPassword: false,
+  },
+  {
+    usuarioId: 4,
+    dni: '45678901',
+    nombres: 'Ana',
+    apellidos: 'Torres',
+    rol: 'docente',
+    correo: 'atorres@lumen.edu.pe',
+    password: 'password123',
+    requiereCambioPassword: false,
+  },
+  {
+    usuarioId: 5,
+    dni: '56789012',
+    nombres: 'Luis',
+    apellidos: 'Vargas',
+    rol: 'docente',
+    correo: 'lvargas@lumen.edu.pe',
+    password: 'password123',
+    requiereCambioPassword: false,
+  },
+  
+  // ESTUDIANTES (con y sin correo - 30% sin correo = menores de edad)
+  {
+    usuarioId: 6,
+    dni: '67890123',
+    nombres: 'Juan',
+    apellidos: 'Pérez',
+    rol: 'estudiante',
+    correo: 'jperez@gmail.com',
+    password: 'password123',
+    requiereCambioPassword: false,
+  },
+  {
+    usuarioId: 7,
+    dni: '78901234',
+    nombres: 'María',
+    apellidos: 'García',
+    rol: 'estudiante',
+    correo: null, // Menor de edad sin correo
+    password: 'password123',
+    requiereCambioPassword: false,
+  },
+  {
+    usuarioId: 8,
+    dni: '89012345',
+    nombres: 'Pedro',
+    apellidos: 'Sánchez',
+    rol: 'estudiante',
+    correo: 'psanchez@gmail.com',
+    password: 'password123',
+    requiereCambioPassword: false,
+  },
+  {
+    usuarioId: 9,
+    dni: '90123456',
+    nombres: 'Lucía',
+    apellidos: 'Ramírez',
+    rol: 'estudiante',
+    correo: null, // Menor de edad sin correo
+    password: 'password123',
+    requiereCambioPassword: false,
+  },
+  {
+    usuarioId: 10,
+    dni: '01234567',
+    nombres: 'Diego',
+    apellidos: 'Flores',
+    rol: 'estudiante',
+    correo: 'dflores@gmail.com',
+    password: 'password123',
+    requiereCambioPassword: false,
   },
 ];
+
+// ESTUDIANTES COMPLETOS (150 estudiantes)
+const STUDENTS = Array.from({ length: 150 }, (_, i) => ({
+  estudiante_id: i + 1,
+  usuario_id: i + 6,
+  codigo_interno: `2025-${['A', 'B', 'C', 'D'][i % 4]}-${['ORD', 'PRI', 'DIR'][i % 3]}-${String(i + 1).padStart(3, '0')}`,
+  dni: String(67890123 + i).slice(0, 8),
+  nombres: ['Juan', 'María', 'Pedro', 'Lucía', 'Diego', 'Ana', 'Carlos', 'Sofia'][i % 8],
+  apellidos: ['Pérez', 'García', 'Sánchez', 'Ramírez', 'Flores', 'Torres', 'Mendoza', 'Vargas'][i % 8],
+  fecha_nacimiento: `200${5 + (i % 3)}-0${(i % 9) + 1}-${10 + (i % 18)}`,
+  correo: i % 3 === 0 ? null : `estudiante${i + 1}@gmail.com`, // 30% sin correo
+  telefono: `98765${String(i).padStart(4, '0')}`,
+  direccion: `Av. Principal ${i + 100}`,
+  modalidad: ['ORDINARIO', 'PRIMERA_OPCION', 'DIRIMENCIA'][i % 3],
+  area_interes: ['A', 'B', 'C', 'D'][i % 4],
+  colegio_procedencia: ['San Antonio', 'Santa Rosa', 'Salesiano', 'La Salle'][i % 4],
+  anio_egreso: 2024 + (i % 2),
+  nombre_apoderado: `Apoderado ${i + 1}`,
+  dni_apoderado: String(40000000 + i),
+  telefono_apoderado: `95432${String(i).padStart(4, '0')}`,
+  relacion_apoderado: ['Padre', 'Madre', 'Tutor'][i % 3],
+  estado: 'ACTIVO',
+  created_at: '2025-08-01',
+}));
 
 // Basic regex matcher for dynamic params
 const matchUrl = (url, pattern) => {

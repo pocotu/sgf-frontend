@@ -57,7 +57,7 @@ const GroupDetailPage = () => {
         <div className="flex gap-2">
           {(user?.rol === 'admin' || user?.rol === 'docente') && (
             <Button onClick={() => navigate(`/dashboard/grupos/${id}/asistencia`)}>
-              📋 Tomar Asistencia
+              Tomar Asistencia
             </Button>
           )}
           <Button variant="outline">Configuración</Button>

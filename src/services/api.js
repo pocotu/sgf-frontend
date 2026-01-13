@@ -1,9 +1,12 @@
 import axios from 'axios';
-import { mockRequest } from './mockAdapter';
+import { mockRequestEntrega3 } from './mockAdapterEntrega3';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 // Force mock only if explicitly true in env, otherwise false (allowing backend connection)
 const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
+
+console.log('[API CONFIG] USE_MOCKS:', USE_MOCKS);
+console.log('[API CONFIG] API_URL:', API_URL);
 
 const api = axios.create({
   baseURL: API_URL,
@@ -30,9 +33,9 @@ api.interceptors.response.use(
   async error => {
     if (USE_MOCKS && error.config) {
       // eslint-disable-next-line no-console
-      console.log(`[MOCK] Intercepting request to: ${error.config.url}`);
+      console.log(`[MOCK E3] Intercepting request to: ${error.config.url}`);
       try {
-        const mockResponse = await mockRequest(error.config);
+        const mockResponse = await mockRequestEntrega3(error.config);
         return { data: mockResponse }; // Return mocked data structure matching axios response
       } catch (mockError) {
         // If mock doesn't handle it, reject with original error or mock error

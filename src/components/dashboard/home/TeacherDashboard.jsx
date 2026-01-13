@@ -99,28 +99,25 @@ const TeacherDashboard = () => {
                 onClick={() => navigate('/dashboard/notas')}
                 className="p-4 bg-blue-50 text-blue-700 rounded-lg font-medium hover:bg-blue-100 transition-colors text-center flex flex-col items-center gap-2"
               >
-                <span className="text-2xl">📝</span>
                 Notas
               </button>
               <button
                 onClick={() => navigate('/dashboard/grupos')}
                 className="p-4 bg-emerald-50 text-emerald-700 rounded-lg font-medium hover:bg-emerald-100 transition-colors text-center flex flex-col items-center gap-2"
               >
-                <span className="text-2xl">📅</span>
                 Asistencia
               </button>
               <button
                 onClick={() => navigate('/dashboard/estudiantes')}
                 className="p-4 bg-purple-50 text-purple-700 rounded-lg font-medium hover:bg-purple-100 transition-colors text-center flex flex-col items-center gap-2"
               >
-                <span className="text-2xl">🎓</span>
                 Alumnos
               </button>
             </div>
           </Card>
 
           <Card className="bg-orange-50 border-orange-100">
-            <h3 className="font-bold text-orange-800 mb-2">📢 Aviso Administrativo</h3>
+            <h3 className="font-bold text-orange-800 mb-2">[AVISO] Aviso Administrativo</h3>
             <p className="text-sm text-orange-700">
               Recuerden que el cierre de notas del Parcial I es este viernes a las 11:59 PM.
             </p>

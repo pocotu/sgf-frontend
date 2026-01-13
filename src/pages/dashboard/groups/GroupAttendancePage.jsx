@@ -115,7 +115,7 @@ const GroupAttendancePage = () => {
             />
           </div>
           <Button onClick={handleSave} loading={saving}>
-            💾 Guardar Asistencia
+            Guardar Asistencia
           </Button>
         </div>
       </div>

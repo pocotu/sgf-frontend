@@ -116,9 +116,27 @@ export const mockRequestEntrega3 = async config => {
         );
       }
       
+      // Mapear a la estructura que espera el frontend
+      const mappedStudents = filtered.map(s => {
+        const usuario = MOCK_USERS.find(u => u.usuarioId === s.usuario_id);
+        return {
+          estudianteId: s.estudiante_id,
+          usuarioId: s.usuario_id,
+          codigoInterno: s.codigo_interno,
+          nombreCompleto: `${s.nombres} ${s.apellidos}`,
+          modalidad: s.modalidad,
+          areaInteres: s.area_interes,
+          usuario: usuario ? {
+            dni: usuario.dni,
+            correo: usuario.correo,
+            estado: usuario.estado,
+          } : null,
+        };
+      });
+      
       return {
         success: true,
-        data: filtered,
+        data: mappedStudents,
       };
     }
 
@@ -450,7 +468,58 @@ export const mockRequestEntrega3 = async config => {
     }
 
     // ============================================
-    // EVALUACIONES
+    // EVALUACIONES (English endpoints)
+    // ============================================
+    
+    if (url === '/evaluations' && method === 'get') {
+      let filtered = MOCK_EVALUATIONS;
+      
+      if (params.tipo) {
+        filtered = filtered.filter(e => e.tipo === params.tipo);
+      }
+      if (params.estado) {
+        filtered = filtered.filter(e => e.estado === params.estado);
+      }
+      
+      // Mapear a la estructura que espera el frontend
+      const mappedEvaluations = filtered.map(e => ({
+        evaluacionId: e.evaluacion_id,
+        descripcion: e.nombre,
+        tipo: e.tipo,
+        fechaEvaluacion: e.fecha_programada,
+        horaInicio: e.hora_inicio,
+        duracionMinutos: e.duracion_minutos,
+        estado: e.estado,
+        puntajeTotal: e.puntaje_total,
+        grupo: {
+          grupoId: 1,
+          nombreGrupo: 'A1-ORD-MAÑ',
+          area: 'A',
+        },
+      }));
+      
+      return {
+        success: true,
+        data: mappedEvaluations,
+      };
+    }
+
+    if (url === '/evaluations' && method === 'post') {
+      const newEvaluation = {
+        evaluacion_id: MOCK_EVALUATIONS.length + 1,
+        ...parsedData,
+        estado: 'PROGRAMADA',
+      };
+      
+      return {
+        success: true,
+        data: newEvaluation,
+        message: 'Evaluación programada exitosamente',
+      };
+    }
+
+    // ============================================
+    // EVALUACIONES (Spanish endpoints)
     // ============================================
     
     if (url === '/evaluaciones' && method === 'get') {
@@ -613,6 +682,32 @@ export const mockRequestEntrega3 = async config => {
     // ============================================
     // REPORTES
     // ============================================
+    
+    if (url === '/reportes/merito' && method === 'get') {
+      // Orden de Mérito - Rankings generales
+      const rankingsData = MOCK_RANKINGS.map((r, index) => {
+        const student = MOCK_STUDENTS.find(s => s.estudiante_id === r.estudiante_id);
+        const areaNames = {
+          'A': 'Ingeniería',
+          'B': 'Ciencias de la Salud',
+          'C': 'Empresariales',
+          'D': 'Sociales y Humanidades',
+        };
+        
+        return {
+          estudiante_id: r.estudiante_id,
+          puesto: index + 1,
+          nombre: r.nombre_completo || `${student?.nombres} ${student?.apellidos}`,
+          facultad: areaNames[student?.area_interes] || 'Ciencias',
+          promedio: r.promedio.toFixed(2),
+        };
+      });
+      
+      return {
+        success: true,
+        data: rankingsData,
+      };
+    }
     
     if (url === '/reportes/academico' && method === 'get') {
       return {

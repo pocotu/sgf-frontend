@@ -15,35 +15,42 @@ const api = axios.create({
   },
 });
 
-// Request interceptor
+// Request interceptor - INTERCEPTA ANTES DE ENVIAR
 api.interceptors.request.use(
-  config => {
+  async config => {
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    
+    // Si USE_MOCKS está activado, interceptar ANTES de hacer la petición
+    if (USE_MOCKS) {
+      // eslint-disable-next-line no-console
+      console.log(`[MOCK E3] Intercepting request BEFORE sending: ${config.method.toUpperCase()} ${config.url}`);
+      try {
+        const mockResponse = await mockRequestEntrega3(config);
+        // Crear una respuesta falsa que axios pueda manejar
+        config.adapter = () => {
+          return Promise.resolve({
+            data: mockResponse,
+            status: 200,
+            statusText: 'OK',
+            headers: {},
+            config,
+          });
+        };
+      } catch (mockError) {
+        // eslint-disable-next-line no-console
+        console.error('[MOCK E3] Error in mock:', mockError);
+        config.adapter = () => {
+          return Promise.reject(mockError);
+        };
+      }
+    }
+    
     return config;
   },
   error => Promise.reject(error),
-);
-
-// Response interceptor (Mocking logic here)
-api.interceptors.response.use(
-  response => response,
-  async error => {
-    if (USE_MOCKS && error.config) {
-      // eslint-disable-next-line no-console
-      console.log(`[MOCK E3] Intercepting request to: ${error.config.url}`);
-      try {
-        const mockResponse = await mockRequestEntrega3(error.config);
-        return { data: mockResponse }; // Return mocked data structure matching axios response
-      } catch (mockError) {
-        // If mock doesn't handle it, reject with original error or mock error
-        return Promise.reject(mockError || error);
-      }
-    }
-    return Promise.reject(error);
-  },
 );
 
 export default api;

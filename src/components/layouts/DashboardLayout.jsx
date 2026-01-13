@@ -30,7 +30,12 @@ const DashboardLayout = () => {
 
   const navItems = [
     { name: 'Inicio', path: '/dashboard', icon: HomeIcon },
-    { name: 'Usuarios', path: '/dashboard/usuarios', icon: UserGroupIcon, roles: ['admin'] },
+    {
+      name: 'Gestión de Accesos',
+      path: '/dashboard/usuarios',
+      icon: UserGroupIcon,
+      roles: ['admin'],
+    },
     {
       name: 'Estudiantes',
       path: '/dashboard/estudiantes',

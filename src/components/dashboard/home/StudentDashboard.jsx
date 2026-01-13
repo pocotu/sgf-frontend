@@ -14,7 +14,7 @@ const StudentDashboard = () => {
     <div className="space-y-6">
       <div className="bg-primary-700 text-white rounded-2xl p-6 md:p-10 relative overflow-hidden shadow-lg">
         <div className="absolute top-0 right-0 opacity-10 transform translate-x-10 -translate-y-10">
-          <span className="text-[200px]">🎓</span>
+          {/* Decorative element removed */}
         </div>
         <div className="relative z-10">
           <h1 className="text-3xl font-bold mb-2">¡Hola, {user?.nombres}!</h1>

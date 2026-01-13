@@ -47,7 +47,7 @@ const RankingsPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <Card className="bg-yellow-50 border-yellow-200">
           <div className="flex items-center gap-4">
-            <div className="text-3xl">🥇</div>
+            <div className="text-3xl font-bold text-yellow-600">#1</div>
             <div>
               <p className="text-sm text-yellow-800 font-bold">1er Puesto</p>
               <p className="text-lg font-bold text-slate-800">{rankings[0]?.nombre || '-'}</p>
@@ -57,7 +57,7 @@ const RankingsPage = () => {
         </Card>
         <Card className="bg-slate-50 border-slate-200">
           <div className="flex items-center gap-4">
-            <div className="text-3xl">🥈</div>
+            <div className="text-3xl font-bold text-slate-600">#2</div>
             <div>
               <p className="text-sm text-slate-600 font-bold">2do Puesto</p>
               <p className="text-lg font-bold text-slate-800">{rankings[1]?.nombre || '-'}</p>
@@ -67,7 +67,7 @@ const RankingsPage = () => {
         </Card>
         <Card className="bg-orange-50 border-orange-200">
           <div className="flex items-center gap-4">
-            <div className="text-3xl">🥉</div>
+            <div className="text-3xl font-bold text-orange-600">#3</div>
             <div>
               <p className="text-sm text-orange-800 font-bold">3er Puesto</p>
               <p className="text-lg font-bold text-slate-800">{rankings[2]?.nombre || '-'}</p>

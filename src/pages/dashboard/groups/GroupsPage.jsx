@@ -71,13 +71,13 @@ const GroupsPage = () => {
 
                 <div className="space-y-2 text-sm text-slate-600 mb-4">
                   <div className="flex items-center gap-2">
-                    <span>🕒</span>
+                    <span className="font-semibold">Horario:</span>
                     <span>
                       {group.dias} | {group.hora_inicio} - {group.hora_fin}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span>👥</span>
+                    <span className="font-semibold">Ocupacion:</span>
                     <span>
                       {group.estudiantes_matriculados} / {group.capacidad} estudiantes
                     </span>

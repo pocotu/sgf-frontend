@@ -91,14 +91,86 @@ const AdminDashboard = () => {
         ))}
       </div>
 
+      {/* Resumen del Sistema */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Info Card */}
-        <Card className="lg:col-span-3" title="Resumen del Sistema">
-          <div className="text-center py-8 text-slate-500">
-            <p>Sistema de Gestión Académica operativo</p>
-            <p className="text-sm mt-2">
-              Utiliza el menú lateral para acceder a las diferentes secciones
-            </p>
+        {/* Actividad Reciente */}
+        <Card className="lg:col-span-2" title="Resumen del Sistema">
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="text-sm text-slate-600">Promedio General</p>
+                <p className="text-2xl font-bold text-blue-600">15.8</p>
+                <p className="text-xs text-slate-500">Escala vigesimal</p>
+              </div>
+              <div className="bg-green-50 p-4 rounded-lg">
+                <p className="text-sm text-slate-600">Asistencia</p>
+                <p className="text-2xl font-bold text-green-600">91.4%</p>
+                <p className="text-xs text-slate-500">Promedio general</p>
+              </div>
+            </div>
+            
+            <div className="border-t pt-4">
+              <h4 className="text-sm font-semibold text-slate-700 mb-3">Últimas Matrículas</h4>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Juan Pérez - Grupo A1</span>
+                  <span className="text-xs text-slate-400">Hace 2 días</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">María García - Grupo B1</span>
+                  <span className="text-xs text-slate-400">Hace 3 días</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Pedro Sánchez - Grupo A2</span>
+                  <span className="text-xs text-slate-400">Hace 5 días</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Distribución */}
+        <Card title="Distribucion">
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-sm font-semibold text-slate-700 mb-2">Por Modalidad</h4>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Ordinario</span>
+                  <span className="font-semibold text-blue-600">60%</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Primera Opción</span>
+                  <span className="font-semibold text-green-600">27%</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Dirimencia</span>
+                  <span className="font-semibold text-orange-600">13%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="border-t pt-4">
+              <h4 className="text-sm font-semibold text-slate-700 mb-2">Por Área</h4>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Área A</span>
+                  <span className="font-semibold">30%</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Área B</span>
+                  <span className="font-semibold">25%</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Área C</span>
+                  <span className="font-semibold">23%</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600">Área D</span>
+                  <span className="font-semibold">22%</span>
+                </div>
+              </div>
+            </div>
           </div>
         </Card>
       </div>

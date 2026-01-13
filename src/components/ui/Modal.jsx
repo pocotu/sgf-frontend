@@ -20,20 +20,20 @@ const Modal = ({ isOpen, onClose, title, children, footer }) => {
   }
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-start justify-center p-4 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       ></div>
 
       {/* Modal Content */}
-      <div className="relative w-full max-w-lg z-10 animate-fade-in-up">
+      <div className="relative w-full max-w-lg z-10 animate-fade-in-up my-8">
         <Card className="bg-white shadow-2xl ring-1 ring-black/5" title={title} footer={footer}>
           {/* Close button absolute */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+            className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors z-10"
           >
             <span className="sr-only">Cerrar</span>
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

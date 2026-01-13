@@ -22,7 +22,7 @@ class ErrorBoundary extends React.Component {
           <div className="max-w-xl w-full bg-white rounded-xl shadow-lg overflow-hidden border border-red-100">
             <div className="bg-red-50 p-6 border-b border-red-100">
               <h2 className="text-xl font-bold text-red-800 flex items-center gap-2">
-                ⚠️ Algo salió mal
+                [ERROR] Algo salio mal
               </h2>
             </div>
             <div className="p-6 space-y-4">
